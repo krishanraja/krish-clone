@@ -6,7 +6,7 @@ Checked against the platforms' own guidance on 2026-10-29. Recheck before record
 
 ElevenLabs' PVC guide ([docs](https://elevenlabs.io/docs/eleven-creative/voices/voice-cloning/professional-voice-cloning/llms.txt)): at least 30 minutes, better 1 to 3 hours; one speaker; one consistent speaking style (the clone copies the style of its samples); speech around -23 to -18 dB RMS with a -3 dB true peak; a quiet, damped room, two fists from the microphone, with a pop filter; files of about 30 minutes, MP3 at 192 kbps or more.
 
-- Script: `clone script` builds `reading-script.md` from Krish's own scripts in 3 Posts. On 2026-10-29 that was 8,043 unique words, about 54 minutes, plus about 21 minutes of free talk to reach 75. Names and figures he uses come first, because clones slip on them.
+- Script: `clone script` builds `reading-script.md` from Krish's own scripts in 3 Posts. On 2026-10-29 that was 7,057 unique words from 13 long scripts (the long version wins where an episode also has a 90 second cut), about 47 minutes, plus about 28 minutes of free talk to reach 75. Names and figures he uses come first, because clones slip on them.
 - Record WAV on one microphone in one sitting. Keep the delivery the voice he wants the clone to have.
 - Harvest it like any source, then `clone export elevenlabs`.
 - Verification on ElevenLabs happens in the browser with the same microphone and tone; read each line once.

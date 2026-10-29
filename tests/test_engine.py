@@ -120,7 +120,7 @@ class ScriptTest(unittest.TestCase):
                 "KRISH: OpenAI cut its price, but only until November, so budget at the full price.\n\n"
                 "## Changes from version 1\n\nDropped the section labels because nobody knows what they mean out loud.\n",
                 encoding="utf-8")
-            (root / "short video-script.md").write_text(
+            (root / "video-script-90-seconds.md").write_text(
                 "Google doubled the price of its newest AI on the first of December, and nobody noticed.\n", encoding="utf-8")
             (root / "youtube-and-substack-words.txt").write_text("Title: Why AI prices keep changing and more words", encoding="utf-8")
             files = sorted(p for p in root.iterdir() if script.is_script(p))
@@ -130,6 +130,7 @@ class ScriptTest(unittest.TestCase):
         self.assertNotIn("Chart of prices", built.markdown)
         self.assertNotIn("section labels", built.markdown)
         self.assertNotIn("KRISH:", built.markdown)
+        self.assertFalse(any(s.endswith("video-script-90-seconds.md") for s in built.sources))  # the long script wins in its folder
         # The short cut repeats the long one, so it is read once.
         self.assertEqual(built.markdown.count("Google doubled the price"), 1)
         self.assertEqual(built.markdown.count("OpenAI cut its price"), 1)

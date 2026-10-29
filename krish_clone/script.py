@@ -19,7 +19,9 @@ from pathlib import Path
 TEXT_SUFFIXES = {".md", ".txt"}
 SKIP_NAMES = ("read me", "readme", "validation", "credits", "chapters", "review", "captions", "youtube", "substack", "title")
 DELIVERY = "Your natural on-camera voice, the one you want the clone to have. Same pace, energy and distance every block."
-META = re.compile(r"square brackets|said to camera|written to be said|the video script|\(about \d|every fact comes from", re.I)
+META = re.compile(r"square brackets|said to camera|written to be said|the video script|\(about \d|every fact comes from"
+                  r"|the story in one line|before you record|fact.?check|read it (aloud|out loud) once", re.I)
+SHORT_CUT = re.compile(r"90.?second|short|teaser|trailer", re.I)
 END_OF_SCRIPT = re.compile(r"^\s*#*\s*(changes from|notes?\b|sources?\b|fact.?check)", re.I)
 MONTHS = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
           "November", "December", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
@@ -118,14 +120,26 @@ class Built:
     sources: list[str] = field(default_factory=list)
 
 
+def prefer_long(paths: list[Path]) -> list[Path]:
+    """Where an episode folder holds a long script and a short cut of it, read only the long one."""
+    by_folder: dict[Path, list[Path]] = {}
+    for path in paths:
+        by_folder.setdefault(path.parent, []).append(path)
+    kept = []
+    for folder_paths in by_folder.values():
+        longs = [p for p in folder_paths if not SHORT_CUT.search(p.name)]
+        kept += longs if longs else folder_paths
+    return sorted(kept)
+
+
 def build(paths: list[Path], *, minutes: float = 75, wpm: float = 150) -> Built:
     raw: list[tuple[str, str]] = []
-    for path in paths:
+    for path in prefer_long(paths):
         try:
             text = path.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        raw += [(path.name, p) for p in clean(text)]
+        raw += [(f"{path.parent.name}/{path.name}", p) for p in clean(text)]
     paragraphs = unique(raw)
     names, numbers = names_and_numbers([p for _, p in paragraphs])
     target_words = int(minutes * wpm)

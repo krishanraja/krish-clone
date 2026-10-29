@@ -11,7 +11,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 - **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B. 28 tests pass; CI runs them.
 - **Approved source:** `episodes`, the 3 Posts folder (Krish, 2026-10-29). Everything else is pending.
 - **Proved in a cloud session on real samples** (two audio files, three photos, a test video built from them, rehearsed through an approved source twice): numbers in `docs/EVALUATION.md` and `docs/STRATEGY.md`. Not yet run on the full 3 Posts folder.
-- **Reading script built** from 21 of his scripts: 8,043 unique words, about 54 minutes, plus free talk to 75.
+- **Reading script built** from 13 of his long scripts and transcripts: 7,057 unique words, about 47 minutes, plus free talk to 75.
 - **No credits spent.** The existing "Krish" voice on ElevenLabs scores 0.41 against his real voice (his own clips: 0.74 to 0.84).
 
 ## What is next and what is waiting on Krish
