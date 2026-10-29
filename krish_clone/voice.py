@@ -152,6 +152,44 @@ def judge(segment: Segment, *, speaker_floor: float | None = None) -> Segment:
     return segment
 
 
+ENVELOPE_FLOOR = -60.0  # dB; below this everything is "quiet", so gated and encoded copies still line up
+SAME_AUDIO = 0.9  # normalised correlation of loudness contours; different speech sits far lower
+
+
+def envelope(db):
+    import numpy
+
+    return numpy.maximum(numpy.asarray(db, dtype=numpy.float32), ENVELOPE_FLOOR)
+
+
+def best_match(piece, whole) -> float:
+    """Highest normalised cross-correlation of a segment's loudness contour anywhere inside another file's."""
+    import numpy
+
+    a = numpy.asarray(piece, dtype=numpy.float64)
+    b = numpy.asarray(whole, dtype=numpy.float64)
+    m, n = len(a), len(b)
+    if m < 50 or n < m or a.std() < 1e-6:
+        return 0.0
+    a = (a - a.mean()) / (a.std() * m)
+    size = 1 << int(numpy.ceil(numpy.log2(n + m)))
+    corr = numpy.fft.irfft(numpy.fft.rfft(b, size) * numpy.fft.rfft(a[::-1], size), size)[m - 1:n]
+    sums = numpy.concatenate(([0.0], numpy.cumsum(b)))
+    squares = numpy.concatenate(([0.0], numpy.cumsum(b * b)))
+    window_mean = (sums[m:] - sums[:-m]) / m
+    window_std = numpy.sqrt(numpy.maximum((squares[m:] - squares[:-m]) / m - window_mean ** 2, 1e-12))
+    return float(numpy.max(corr / window_std))
+
+
+def repeat_of(segment: "Segment", own, others: dict) -> str | None:
+    """The key of an already-kept file that contains this segment's audio, if any."""
+    piece = own[int(segment.start / FRAME):int(segment.end / FRAME)]
+    for key, whole in others.items():
+        if best_match(piece, whole) >= SAME_AUDIO:
+            return key
+    return None
+
+
 @dataclass
 class VoiceRead:
     source: str
@@ -160,12 +198,32 @@ class VoiceRead:
     loudness: dict
     heard: str
     segments: list[Segment]
+    envelope: object = None  # loudness contour, FRAME seconds per value, for finding the same audio in other cuts
 
     def minutes(self, tier: str) -> float:
         return round(sum(s.duration for s in self.segments if s.tier == tier) / 60, 2)
 
+    @classmethod
+    def from_dict(cls, data: dict) -> "VoiceRead":
+        import base64
+
+        import numpy
+
+        fields = Segment.__dataclass_fields__
+        segments = [Segment(**{k: v for k, v in row.items() if k in fields}) for row in data["segments"]]
+        contour = None
+        if data.get("envelope"):
+            contour = numpy.frombuffer(base64.b64decode(data["envelope"]), dtype=numpy.float16).astype(numpy.float32)
+        return cls(data["source"], data["duration"], data["room_tone_db"], data["loudness"], data["heard"], segments, contour)
+
     def as_dict(self) -> dict:
-        return {"source": self.source, "duration": self.duration, "room_tone_db": self.room_tone_db,
+        import base64
+
+        import numpy
+
+        contour = (base64.b64encode(numpy.asarray(self.envelope, dtype=numpy.float16).tobytes()).decode()
+                   if self.envelope is not None else None)
+        return {"source": self.source, "duration": self.duration, "room_tone_db": self.room_tone_db, "envelope": contour,
                 "loudness": self.loudness, "heard": self.heard,
                 "minutes": {t: self.minutes(t) for t in ("clean", "review", "rejected")},
                 "segments": [s.as_dict() for s in self.segments]}
@@ -186,4 +244,5 @@ def read(path: Path, *, heard=None, verifier=None, speaker_floor: float = 0.45) 
             segment.speaker = verifier.similarity(samples[int(segment.start * RATE):int(segment.end * RATE)], RATE)
         judge(segment, speaker_floor=speaker_floor if verifier is not None else None)
     return VoiceRead(path.name, round(len(samples) / RATE, 2), round(floor, 1), cw_audio.loudness(path),
-                     heard.heard if heard.heard == "words" else f"{heard.heard}:{heard.heard_class}", segments)
+                     heard.heard if heard.heard == "words" else f"{heard.heard}:{heard.heard_class}", segments,
+                     envelope(db))

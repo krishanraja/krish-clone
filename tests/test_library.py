@@ -64,3 +64,28 @@ class ReportTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+@unittest.skipUnless(FFMPEG, "ffmpeg not installed")
+class ExportTest(unittest.TestCase):
+    def test_elevenlabs_export_meets_the_pvc_format(self):
+        from krish_clone import export, media
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            lib = library.Library(root / "lib")
+            master = make_audio(root / "m.wav", "aevalsrc='0.05*sin(2*PI*180*t)*lt(mod(t,1),0.7)':s=48000", 20)
+            for start in (0.0, 8.0):
+                lib.add_voice("k", master, voice.judge(voice.Segment(start, start + 6.0, f"s{start}", snr_db=40)))
+            lib.save()
+            result = export.elevenlabs(root / "lib", root / "out")
+            target = root / "out" / "elevenlabs-pvc-01.mp3"
+            self.assertEqual(len(result["files"]), 1)
+            self.assertAlmostEqual(media.probe(target).duration, 12.8, delta=0.3)
+            from content_watcher.read.audio import loudness
+
+            level = loudness(target)
+            self.assertAlmostEqual(level["integrated_lufs"], export.PVC_LOUDNESS, delta=1.5)
+            self.assertLessEqual(level["true_peak_dbfs"], export.PVC_TRUE_PEAK + 0.5)
+            with self.assertRaises(FileExistsError):
+                export.elevenlabs(root / "lib", root / "out")

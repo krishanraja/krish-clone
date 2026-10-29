@@ -14,7 +14,7 @@ dependencies = ["content-watcher", "numpy"]
 
 [project.optional-dependencies]
 voice = ["faster-whisper==1.2.1"]
-face = ["opencv-python-headless<5", "onnxruntime", "insightface==0.7.3"]
+face = ["opencv-python-headless<5", "onnxruntime"]
 separate = ["demucs"]
 speaker = ["speechbrain", "torchaudio"]
 
@@ -23,3 +23,6 @@ clone = "krish_clone.cli:entrypoint"
 
 [tool.setuptools]
 packages = ["krish_clone"]
+
+[tool.setuptools.package-data]
+krish_clone = ["data/*.json"]

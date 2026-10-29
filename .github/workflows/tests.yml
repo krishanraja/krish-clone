@@ -1,0 +1,27 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: install
+        run: |
+          python -m pip install --upgrade pip
+          pip install "content-watcher @ git+https://github.com/krishanraja/content-watcher@main"
+          pip install numpy "opencv-python-headless<5" onnxruntime
+          pip install -e .
+      - name: test
+        run: python -m unittest discover -s tests -t . -v
+      - name: no media in the repository
+        run: |
+          if git ls-files | grep -iE '\.(jpe?g|png|webp|wav|m4a|mp3|mp4|mov)$'; then echo "media committed"; exit 1; fi

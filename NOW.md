@@ -2,20 +2,20 @@
 
 ## What it is
 
-The engine that builds Krish's voice and likeness training library from his own recordings and photos, on his own machine, so ElevenLabs and HeyGen are trained on the best material he has and the gaps are measured. See `README.md`; the reasoning is in `docs/STRATEGY.md`.
+The engine that builds Krish's voice and likeness training library from his own recordings and photos, on his own machine, exports it in each platform's format and judges the clones that come back. See `README.md`; the reasoning is in `docs/STRATEGY.md`.
 
 ## Where it is right now (as of 2026-10-29)
 
-**North Star: not set** (`docs/NORTH_STAR.md`; a proposal is waiting on Krish).
+**North Star: not set** (`docs/NORTH_STAR.md`; a proposal waits on Krish).
 
-- **Built** (first commit): sources gate, voice judge, face judge with ArcFace identity and pose, library writer, inventory report, `clone` command. 19 tests pass on generated media.
-- **Run on real samples in a cloud session**: two audio files, three photos, one test video built from them. Results in `docs/STRATEGY.md`. Not yet run on any full source.
-- **Every source is pending** in `config/sources.json`. Nothing has been read beyond the samples above.
-- **No credits spent** on ElevenLabs or HeyGen.
+- **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B. 28 tests pass; CI runs them.
+- **Approved source:** `episodes`, the 3 Posts folder (Krish, 2026-10-29). Everything else is pending.
+- **Proved in a cloud session on real samples** (two audio files, three photos, a test video built from them, rehearsed through an approved source twice): numbers in `docs/EVALUATION.md` and `docs/STRATEGY.md`. Not yet run on the full 3 Posts folder.
+- **Reading script built** from 21 of his scripts: 8,043 unique words, about 54 minutes, plus free talk to 75.
+- **No credits spent.** The existing "Krish" voice on ElevenLabs scores 0.41 against his real voice (his own clips: 0.74 to 0.84).
 
 ## What is next and what is waiting on Krish
 
-- **Waiting on Krish:** approve the first source (`clone sources approve episodes --local-path ...`) on a home computer, one at a time. Proposed order: episodes, photos-headshots, photos-faces; then decide on the three proposed raw phone folders.
-- **Waiting on Krish:** the North Star.
-- **Next action:** install on one home computer and run `clone inventory` on the episodes folder to replace the 20 to 40 clean-minute estimate with a number.
-- **Then:** the capture kit (reading script, twin shot list), and vendoring VoiceStudio's Apache-2.0 eval kit for phase 4.
+- **Next action (Krish, home computer):** `scripts\install-krish-clone.ps1`, then `scripts\run-first-sources.ps1`; read `inventory.md` before saying yes to the harvest.
+- **Waiting on Krish:** the voice session (`reading-script.md`) and the twin take (`docs/CAPTURE.md`).
+- **Waiting on Krish:** the North Star, and whether to approve the next source (proposed: camera, the raw phone video).

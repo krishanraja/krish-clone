@@ -27,6 +27,7 @@ def render(manifest: dict) -> str:
         f"- Clean: **{clean:.1f} min** against {PVC_MINIMUM:.0f} min to start and {PVC_GOOD:.0f} min to do well.",
         f"- Review (usable after a listen): {review:.1f} min.",
         f"- Shortfall to the minimum: **{max(0.0, PVC_MINIMUM - clean):.1f} min**; to good: {max(0.0, PVC_GOOD - clean):.1f} min.",
+        f"- Repeats skipped (the same audio in another cut): {len(manifest.get('duplicates', {}))}.",
         "",
         "## Face (HeyGen)", "",
         f"- Stills from video: {len(stills)}. Photos kept: {len(photos)}.",
@@ -34,6 +35,7 @@ def render(manifest: dict) -> str:
         "- A Digital Twin is trained from a purpose-shot recording with a spoken consent statement, not from these.",
         "  These stills set the reference look and feed a Photo Avatar; the twin still needs one shoot.",
         "",
+        *gallery_lines(manifest),
         "## Per source", "",
         "| File | Kind | Clean min | Review min | Faces kept | Note |",
         "|---|---|---|---|---|---|",
@@ -47,6 +49,15 @@ def render(manifest: dict) -> str:
         lines += ["", "## Why material was rejected", ""]
         lines += [f"- {reason}: {count}" for reason, count in rejected.most_common(12)]
     return "\n".join(lines) + "\n"
+
+
+def gallery_lines(manifest: dict) -> list[str]:
+    gallery = manifest.get("gallery")
+    if not gallery:
+        return []
+    return ["## Who counts as Krish", "",
+            f"- Gallery: {gallery.get('kind')}, {gallery.get('size')} reference faces"
+            + (f"; groups found {gallery.get('largest')}" if gallery.get("largest") else "") + ".", ""]
 
 
 def write(manifest: dict, root: Path) -> Path:

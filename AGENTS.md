@@ -13,6 +13,7 @@ This repository builds the training library for Krish's voice clone (ElevenLabs)
 - No spend. Every ElevenLabs or HeyGen call (clone, upload, generation) needs Krish's approval immediately before it.
 - Never overwrite or delete library files; the library is content-addressed and idempotent.
 - No em dashes anywhere, code comments included.
+- This repository is public. Only code and documentation are committed; the library, reading script, exports and caches stay on Krish's machines and Drive.
 
 Run tests with:
 

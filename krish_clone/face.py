@@ -1,8 +1,8 @@
 """Find frames and photos where Krish's face is sharp, well lit, large and plainly him.
 
-Detection and identity come from insightface buffalo_l (ArcFace, 512 numbers per face), the
-model contentarchives already runs over Krish's library, with its measured 0.55 cosine join
-threshold. contentarchives never scored quality; this module adds sharpness, exposure, size and
+Detection and identity come from insightface's buffalo_l models (ArcFace, 512 numbers per face),
+the models contentarchives already runs over Krish's library, with its measured 0.55 cosine join
+threshold. They run through onnxruntime directly (faceonnx.py), so Windows needs no compiler. contentarchives never scored quality; this module adds sharpness, exposure, size and
 head pose, then keeps a spread of poses rather than forty copies of the same angle.
 """
 
@@ -56,20 +56,18 @@ class Face:
 
 
 class Detector:
-    """insightface when installed, else OpenCV's Haar detector with no identity and no pose."""
+    """buffalo_l through onnxruntime, else OpenCV's Haar detector with no identity and no pose."""
 
-    def __init__(self, backend: str = "auto", det_size: int = 640):
+    def __init__(self, backend: str = "auto", home: Path | None = None, det_size: int = 640):
         self.backend = None
-        if backend in ("auto", "insightface"):
+        if backend in ("auto", "onnx"):
             try:
-                from insightface.app import FaceAnalysis  # type: ignore
+                from .faceonnx import OnnxFaces
 
-                self.app = FaceAnalysis(name="buffalo_l", providers=["CPUExecutionProvider"],
-                                        allowed_modules=["detection", "recognition", "landmark_3d_68"])
-                self.app.prepare(ctx_id=-1, det_size=(det_size, det_size))
-                self.backend = "insightface"
+                self.app = OnnxFaces(home or Path.home() / ".krish-clone", det_size=det_size)
+                self.backend = "onnx"
             except Exception:  # noqa: BLE001 - any failure falls back, and the backend is recorded
-                if backend == "insightface":
+                if backend == "onnx":
                     raise
         if self.backend is None:
             import cv2
@@ -94,14 +92,8 @@ class Detector:
         return found
 
     def _detect(self, image) -> list[dict]:
-        if self.backend == "insightface":
-            found = []
-            for face in self.app.get(image):
-                pose = getattr(face, "pose", None)
-                found.append({"box": [int(v) for v in face.bbox], "det": float(face.det_score),
-                              "embedding": getattr(face, "normed_embedding", None),
-                              "pose": [float(v) for v in pose] if pose is not None else None})
-            return found
+        if self.backend == "onnx":
+            return self.app.get(image)
         import cv2
 
         grey = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -129,6 +121,34 @@ class Gallery:
         if embedding is None:
             return None
         return round(float(embedding @ self.centroid), 3)
+
+    @classmethod
+    def dominant(cls, embeddings: list, *, join: float = IDENTITY_FLOOR, minimum: int = 5) -> tuple["Gallery", dict]:
+        """Krish as the largest identity across an approved source: he presents every episode.
+
+        Greedy centroid grouping at contentarchives' measured join threshold (cluster_faces.py),
+        largest group wins. Refuses when the winner is not clearly dominant, so a source full of
+        other people never quietly becomes "Krish".
+        """
+        import numpy
+
+        groups: list[dict] = []
+        for vector in embeddings:
+            best = max(groups, key=lambda g: float(vector @ g["centroid"]), default=None)
+            if best is not None and float(vector @ best["centroid"]) >= join:
+                best["members"].append(vector)
+                mean = numpy.mean(best["members"], axis=0)
+                best["centroid"] = mean / numpy.linalg.norm(mean)
+            else:
+                groups.append({"members": [vector], "centroid": vector})
+        groups.sort(key=lambda g: len(g["members"]), reverse=True)
+        sizes = [len(g["members"]) for g in groups[:5]]
+        report = {"faces": len(embeddings), "groups": len(groups), "largest": sizes}
+        if not groups or sizes[0] < minimum:
+            raise ValueError(f"no identity appears often enough to be Krish ({report})")
+        if len(sizes) > 1 and sizes[0] < 2 * sizes[1]:
+            raise ValueError(f"two identities are close in size; pass --gallery photos instead ({report})")
+        return cls(groups[0]["members"]), report
 
     @classmethod
     def from_photos(cls, paths: list[Path], detector: Detector) -> "Gallery":
@@ -231,7 +251,8 @@ def select(faces: list[Face], *, limit: int = 60, per_bin: int | None = None) ->
     return sorted(chosen, key=lambda f: f.quality, reverse=True)
 
 
-def faces_in_photo(path: Path, detector: Detector, gallery: Gallery | None) -> list[Face]:
+def faces_in_photo(path: Path, detector: Detector) -> list[Face]:
+    """The subject of a photo, measured but not yet judged (identity needs the gallery first)."""
     image = read_image(path)
     if image is None:
         return []
@@ -239,11 +260,11 @@ def faces_in_photo(path: Path, detector: Detector, gallery: Gallery | None) -> l
     if not found:
         return []
     largest = max(found, key=lambda f: f["box"][3] - f["box"][1])  # openface's rule: the subject is the largest face
-    return [judge(score(image, largest, source=path.name, t=None, gallery=gallery), need_identity=gallery is not None)]
+    return [score(image, largest, source=path.name, t=None, gallery=None)]
 
 
-def faces_in_video(path: Path, detector: Detector, gallery: Gallery | None, *, fps: float = 2.0,
-                   max_side: int = 1920) -> tuple[list[Face], dict]:
+def faces_in_video(path: Path, detector: Detector, *, fps: float = 2.0, max_side: int = 1920) -> tuple[list[Face], dict]:
+    """The largest face in each sampled frame, measured but not yet judged."""
     info = media.probe(path)
     if not info.width or not info.height:
         return [], {"duration": info.duration, "frames": 0}
@@ -253,10 +274,56 @@ def faces_in_video(path: Path, detector: Detector, gallery: Gallery | None, *, f
     for t, frame in media.frames(path, fps, width, height):
         seen += 1
         found = detector.detect(frame)
-        if not found:
-            continue
-        largest = max(found, key=lambda f: f["box"][3] - f["box"][1])
-        face = judge(score(frame, largest, source=path.name, t=round(t, 2), gallery=gallery),
-                     need_identity=gallery is not None)
-        faces.append(face)
+        if found:
+            largest = max(found, key=lambda f: f["box"][3] - f["box"][1])
+            faces.append(score(frame, largest, source=path.name, t=round(t, 2), gallery=None))
     return faces, {"duration": info.duration, "frames": seen, "width": width, "height": height}
+
+
+def to_cache(faces: list[Face]) -> list[dict]:
+    import base64
+
+    import numpy
+
+    rows = []
+    for f in faces:
+        row = f.as_dict()
+        row["hash"] = f.hash
+        row["embedding"] = (base64.b64encode(numpy.asarray(f.embedding, dtype=numpy.float16).tobytes()).decode()
+                            if f.embedding is not None else None)
+        rows.append(row)
+    return rows
+
+
+def from_cache(rows: list[dict]) -> list[Face]:
+    import base64
+
+    import numpy
+
+    faces = []
+    for row in rows:
+        row = dict(row)
+        vector = row.pop("embedding")
+        for derived in ("identity", "quality", "tier", "reasons", "notes"):
+            row.pop(derived, None)
+        face = Face(**row)
+        if vector:
+            v = numpy.frombuffer(base64.b64decode(vector), dtype=numpy.float16).astype(numpy.float32)
+            face.embedding = v / numpy.linalg.norm(v)
+        faces.append(face)
+    return faces
+
+
+def identify(faces: list[Face], gallery: Gallery | None) -> list[Face]:
+    """Set identity against the gallery and judge every face afresh."""
+    for f in faces:
+        f.identity = gallery.similarity(f.embedding) if gallery is not None else None
+        f.reasons, f.notes, f.tier = [], [], "rejected"
+        judge(f, need_identity=gallery is not None)
+    return faces
+
+
+def gallery_candidates(faces: list[Face]) -> list:
+    """Faces good enough to vote on who the subject is: large, confident, roughly frontal."""
+    return [f.embedding for f in faces if f.embedding is not None and f.det >= 0.7 and f.face_px >= MIN_FACE_PX
+            and (f.yaw is None or abs(f.yaw) <= 30)]

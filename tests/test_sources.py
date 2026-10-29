@@ -15,8 +15,11 @@ def config(directory: Path, **status) -> Path:
 
 
 class SourcesTest(unittest.TestCase):
-    def test_shipped_config_starts_every_source_pending(self):
-        self.assertTrue(all(s.status == "pending" for s in sources.load()))
+    def test_shipped_config_approves_only_what_krish_approved(self):
+        shipped = {s.id: s for s in sources.load()}
+        self.assertEqual([k for k, s in shipped.items() if s.status == "approved"], ["episodes"])
+        self.assertIn("Krish, 2026-10-29", shipped["episodes"].approval)
+        self.assertTrue(shipped["episodes"].local_path.endswith("3 Posts"))
 
     def test_pending_unknown_and_pathless_sources_are_refused(self):
         with tempfile.TemporaryDirectory() as tmp:

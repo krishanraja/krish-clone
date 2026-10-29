@@ -23,6 +23,7 @@ class Source:
     status: str
     local_path: str | None
     note: str = ""
+    approval: str = ""  # Krish's words when he approved it
 
     @property
     def approved(self) -> bool:
@@ -35,7 +36,7 @@ def load(path: Path = DEFAULT) -> list[Source]:
 
 
 def _source(entry: dict) -> Source:
-    return Source(**{k: entry.get(k, "" if k == "note" else None) for k in Source.__dataclass_fields__})
+    return Source(**{k: entry.get(k, "" if k in ("note", "approval") else None) for k in Source.__dataclass_fields__})
 
 
 def set_status(source_id: str, status: str, path: Path = DEFAULT, *, local_path: str | None = None) -> Source:

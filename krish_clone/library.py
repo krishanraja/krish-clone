@@ -42,6 +42,10 @@ class Library:
                                               **read}
         return sha[:16]
 
+    def note_duplicate(self, key: str, segment, of_key: str) -> None:
+        """A segment whose audio is already kept from another file (the other cut of the same episode)."""
+        self.manifest.setdefault("duplicates", {})[f"{key}_{int(segment.start * 1000):08d}.wav"] = of_key
+
     def add_voice(self, key: str, master: Path, segment) -> str:
         name = f"{key}_{int(segment.start * 1000):08d}.wav"
         tier = "clean" if segment.tier == "clean" else "review"

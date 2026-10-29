@@ -21,6 +21,7 @@ class Probe:
     width: int | None
     height: int | None
     has_audio: bool
+    fps: float | None = None
 
 
 def kind_of(path: Path) -> str | None:
@@ -40,7 +41,7 @@ def probe(path: Path) -> Probe:
     if ran.returncode != 0:
         raise RuntimeError(f"ffprobe failed on {path.name}: {ran.stderr.strip()[:200]}")
     info = json.loads(ran.stdout or "{}")
-    width = height = None
+    width = height = fps = None
     for stream in info.get("streams", []):
         if stream.get("codec_type") == "video" and stream.get("disposition", {}).get("attached_pic") != 1:
             width, height = stream.get("width"), stream.get("height")
@@ -50,9 +51,11 @@ def probe(path: Path) -> Probe:
             rotation = rotation or int(stream.get("tags", {}).get("rotate", 0) or 0)
             if abs(rotation) % 180 == 90:
                 width, height = height, width
+            num, _, den = str(stream.get("avg_frame_rate") or stream.get("r_frame_rate") or "0/1").partition("/")
+            fps = round(float(num) / float(den), 2) if den and float(den) else None
             break
     duration = float(info.get("format", {}).get("duration") or 0)
-    return Probe(duration, width, height, any(s.get("codec_type") == "audio" for s in info.get("streams", [])))
+    return Probe(duration, width, height, any(s.get("codec_type") == "audio" for s in info.get("streams", [])), fps)
 
 
 def voice_master(path: Path, target: Path) -> Path:
