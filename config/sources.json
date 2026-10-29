@@ -1,0 +1,19 @@
+{
+  "format": "krish-clone.sources/1",
+  "note": "Every source starts pending. Only Krish approves one, one at a time. local_path is filled on each home computer (Drive for Desktop).",
+  "library_drive_id": "1dLmAXhPxd-hiZCEjEiVgrL9UARjQgMmI",
+  "sources": [
+    {"id": "episodes", "name": "Content episodes (finished edits, music beds)", "drive_id": "17KdbFrZXKmGXkCaMpmntRD9rrAhnWkcT", "kind": "video", "status": "pending", "local_path": null,
+     "note": "22 finished cuts, about 1.8 GB, plus working and quality evidence subfolders. Voiceover review renders and approved audio are the likeliest clean voice."},
+    {"id": "photos-headshots", "name": "Headshots for AI", "drive_id": "1tlaEB7sY8v1JoK9Axqofkr4kdpmfVDc-", "kind": "photo", "status": "pending", "local_path": null,
+     "note": "15 photos. Seeds the identity gallery."},
+    {"id": "photos-faces", "name": "Faces library (with MORE)", "drive_id": "1mjroKW7b6ENF5SeXT4OVKxuxVvLospFn", "kind": "photo", "status": "pending", "local_path": null,
+     "note": "About 70 photos, MORE subfolder about 150, one 19 MB video, the FACES MASTER PROMPT LIBRARY doc. Contains duplicates."},
+    {"id": "camera", "name": "Camera (raw phone video)", "drive_id": "1_NjWfDR9SDqddM1qhA-il2kD8n5uSLXz", "kind": "video", "status": "pending", "local_path": null,
+     "note": "Proposed, not asked for. VID_2025*.mp4, about 1 GB. Raw, unedited: potentially the best voice and face source, but content unknown."},
+    {"id": "restored", "name": "Restored (phone .MOV)", "drive_id": "1YRFb4mzfWU9nFcsF5NZHOj6i8o5uUCUj", "kind": "video", "status": "pending", "local_path": null,
+     "note": "Proposed, not asked for. IMG_*.MOV clips, content unknown."},
+    {"id": "files", "name": "files (IMG_9xxx.MP4)", "drive_id": "18LhIphQvqErRBCPZ-vkVLE4Y2IK6GhSe", "kind": "video", "status": "pending", "local_path": null,
+     "note": "Proposed, not asked for. Short phone clips of 2 to 6 MB, content unknown."}
+  ]
+}

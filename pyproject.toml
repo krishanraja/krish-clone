@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "krish-clone"
+version = "0.1.0"
+description = "Local-first engine that builds a voice and likeness training library from Krish's own recordings and photos"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Krishan Raja" }]
+dependencies = ["content-watcher", "numpy"]
+
+[project.optional-dependencies]
+voice = ["faster-whisper==1.2.1"]
+face = ["opencv-python-headless<5", "onnxruntime", "insightface==0.7.3"]
+separate = ["demucs"]
+speaker = ["speechbrain", "torchaudio"]
+
+[project.scripts]
+clone = "krish_clone.cli:entrypoint"
+
+[tool.setuptools]
+packages = ["krish_clone"]

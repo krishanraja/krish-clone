@@ -1,0 +1,7 @@
+# Attributions
+
+- **content-watcher** (krishanraja/content-watcher, MIT): imported as a dependency. Transcription (`read/audio.transcribe`, faster-whisper), loudness (`read/audio.loudness`), 16 kHz decoding, `timeline/moments.dhash` and `hamming`, ffmpeg helpers in `tools`.
+- **contentarchives** (krishanraja/contentarchives, read at `c609162`): the insightface `buffalo_l` detect and embed approach (`stages/13_app/cloud_enrich.py` `Faces.detect`), the 0.55 cosine join threshold measured on Krish's own library (`cluster_faces.py`), and the 0.12 subject share (`SUBJECT_SHARE`). No code copied.
+- **OpenFace** (cmusatyalab/openface, Apache-2.0, read at `99b7241`): the idea of keeping the largest face as the subject and accepting faces by distance to a reference gallery. No code copied; its nn4.small2 model (about 93% on LFW) is too weak for identity here.
+- **VoiceStudio** (debpalash/VoiceStudio, AGPL-3.0, read at `4d4cb0b`): patterns only, reimplemented, because copying AGPL code would relicense this repository. Its Apache-2.0 `omnivoice/eval` (WavLM-ECAPA speaker similarity, UTMOS, WER) is the planned evaluation kit for phase 4 and is not vendored yet.
+- **Models downloaded at run time, not shipped:** insightface `buffalo_l` (non-commercial research licence: fine for Krish's own clone, would need replacing in a commercial product), SpeechBrain `spkrec-ecapa-voxceleb` (Apache-2.0), faster-whisper `small`.

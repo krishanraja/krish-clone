@@ -1,0 +1,17 @@
+__pycache__/
+*.egg-info/
+.venv/
+runtime/
+library/
+# Face and voice media never enter git.
+*.mp4
+*.mov
+*.MOV
+*.m4a
+*.wav
+*.mp3
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.npy
