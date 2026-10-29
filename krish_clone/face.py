@@ -64,7 +64,9 @@ class Detector:
             try:
                 from .faceonnx import OnnxFaces
 
-                self.app = OnnxFaces(home or Path.home() / ".krish-clone", det_size=det_size)
+                from .paths import runtime
+
+                self.app = OnnxFaces(home or runtime(), det_size=det_size)
                 self.backend = "onnx"
             except Exception:  # noqa: BLE001 - any failure falls back, and the backend is recorded
                 if backend == "onnx":

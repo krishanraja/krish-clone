@@ -16,6 +16,6 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What is next and what is waiting on Krish
 
-- **Next action (Krish, home computer):** `scripts\install-krish-clone.ps1`, then `scripts\run-first-sources.ps1`; read `inventory.md` before saying yes to the harvest.
+- **Next action (Krish, home computer):** paste the bootstrap line from `README.md` (it puts krish-clone in `%USERPROFILE%\dev\makeyourmindup\` with the rest of the machinery and installs it), then `scripts\run-first-sources.ps1`; read `inventory.md` before saying yes to the harvest.
 - **Waiting on Krish:** the voice session (`reading-script.md`) and the twin take (`docs/CAPTURE.md`).
 - **Waiting on Krish:** the North Star, and whether to approve the next source (proposed: camera, the raw phone video).

@@ -2,20 +2,23 @@
 
 ## Install (once per home computer)
 
-Needs Python 3.12 (`py -3.12`), ffmpeg (`winget install Gyan.FFmpeg`), and content-watcher cloned beside krish-clone.
+Needs Python 3.12 (`py -3.12`) and ffmpeg (`winget install Gyan.FFmpeg`). Nothing else has to be cloned first. Paste into PowerShell:
 
 ```powershell
-cd <your repos folder>\krish-clone
-powershell -ExecutionPolicy Bypass -File scripts\install-krish-clone.ps1 -CheckOnly
-powershell -ExecutionPolicy Bypass -File scripts\install-krish-clone.ps1
+irm https://raw.githubusercontent.com/krishanraja/krish-clone/main/scripts/bootstrap.ps1 | iex
 ```
 
-It creates `%LOCALAPPDATA%\krish-clone\venv`, installs CPU-only packages (no compiler), downloads the face models once (sha256 checked) and ends with `clone doctor`.
+It follows the shared Make Your Mind Up layout (`config/studio.json`):
+
+- the code goes to `%USERPROFILE%\dev\makeyourmindup\krish-clone`, beside content-engine and content-watcher (cloned with git, or downloaded as a zip without it; an existing clone is updated, never replaced);
+- the venv, models and cache go to `%LOCALAPPDATA%\makeyourmindup\krish-clone\`;
+- content-watcher comes from its clone at `%USERPROFILE%\dev\makeyourmindup\content-watcher` if there is one, otherwise straight from GitHub;
+- CPU-only packages (no compiler); the face models download once, sha256 checked; it ends with `clone doctor`.
 
 ## First run: the approved episodes (3 Posts)
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts\run-first-sources.ps1
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\dev\makeyourmindup\krish-clone\scripts\run-first-sources.ps1"
 ```
 
 1. `clone doctor`.
@@ -32,8 +35,8 @@ Steps on their own: `-Step inventory`, `-Step harvest`, `-Step script`.
 Only Krish approves a source, one at a time:
 
 ```powershell
-& "$env:LOCALAPPDATA\krish-clone\venv\Scripts\clone.exe" sources
-& "$env:LOCALAPPDATA\krish-clone\venv\Scripts\clone.exe" sources approve camera --local-path "H:\My Drive\...\Camera"
+& "$env:LOCALAPPDATA\makeyourmindup\krish-clone\venv\Scripts\clone.exe" sources
+& "$env:LOCALAPPDATA\makeyourmindup\krish-clone\venv\Scripts\clone.exe" sources approve camera --local-path "H:\My Drive\...\Camera"
 ```
 
 Then run `inventory` and `harvest` with `--source camera` into the same library. Repeats of audio already kept are skipped.

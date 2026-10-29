@@ -28,12 +28,15 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$clone = Join-Path $env:LOCALAPPDATA "krish-clone\venv\Scripts\clone.exe"
-if (-not (Test-Path $clone)) { Write-Host "Run scripts\install-krish-clone.ps1 first."; exit 1 }
+$repo = Split-Path -Parent $PSScriptRoot
+$studio = Get-Content (Join-Path $repo "config\studio.json") -Raw | ConvertFrom-Json
+$runtime = Join-Path ([Environment]::ExpandEnvironmentVariables($studio.local_roots.runtime)) "krish-clone"
+$clone = Join-Path $runtime "venv\Scripts\clone.exe"
+if (-not (Test-Path $clone)) { Write-Host "Install first: scripts\bootstrap.ps1 or scripts\install-krish-clone.ps1."; exit 1 }
 if (-not $Enrol) {
   $Enrol = Join-Path $Posts "2026-10-23 Fri mind.the.gap - Two passports\3 Video\quality evidence\Friday-join-candidates.wav"
 }
-$logDir = Join-Path $env:LOCALAPPDATA "krish-clone\logs"
+$logDir = Join-Path $runtime "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $log = Join-Path $logDir ("run-{0:yyyyMMdd-HHmmss}.log" -f (Get-Date))
 $env:PYTHONIOENCODING = "utf-8"

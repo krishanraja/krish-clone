@@ -21,9 +21,11 @@ Nothing here uploads or spends a credit. Every upload, clone or generation is a 
 ## Install and first run (Windows home computer)
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File scripts\install-krish-clone.ps1
-powershell -ExecutionPolicy Bypass -File scripts\run-first-sources.ps1
+irm https://raw.githubusercontent.com/krishanraja/krish-clone/main/scripts/bootstrap.ps1 | iex
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\dev\makeyourmindup\krish-clone\scripts\run-first-sources.ps1"
 ```
+
+It lives with the rest of the Make Your Mind Up machinery: code in `%USERPROFILE%\dev\makeyourmindup\krish-clone`, runtime in `%LOCALAPPDATA%\makeyourmindup\krish-clone\` (`config/studio.json`).
 
 Details: `docs/RUNBOOK.md`.
 

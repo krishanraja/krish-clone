@@ -1,0 +1,12 @@
+{
+  "schema": "studio/1",
+  "why": "One local layout for the Make Your Mind Up machinery (W2.11). Same shape as content-watcher's and growth-makeyourmindup's config/studio.json; content-engine's copy beside this clone wins when present (content_watcher.layout). krish-clone lives at local_roots.repos with {repo}=krish-clone and keeps its runtime (venv, models, cache, voice masters) under local_roots.runtime\\krish-clone.",
+  "local_roots": {
+    "repos": "C:\\Users\\krish\\dev\\makeyourmindup\\{repo}",
+    "worktrees": "C:\\Users\\krish\\dev\\makeyourmindup\\.worktrees\\{repo}\\{branch}",
+    "runtime": "%LOCALAPPDATA%\\makeyourmindup\\"
+  },
+  "preserve": [
+    ".scratch"
+  ]
+}

@@ -78,7 +78,9 @@ class OnnxAlignmentTest(unittest.TestCase):
         reference.prepare(ctx_id=-1, det_size=(640, 640))
         image = read_image(image_path)
         theirs = reference.get(image)
-        ours = OnnxFaces(Path.home() / ".krish-clone").get(image)
+        from krish_clone.paths import runtime
+
+        ours = OnnxFaces(runtime()).get(image)
         self.assertEqual(len(theirs), len(ours))
         for face in theirs:
             match = min(ours, key=lambda o: abs(o["box"][0] - face.bbox[0]) + abs(o["box"][1] - face.bbox[1]))

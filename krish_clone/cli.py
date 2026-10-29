@@ -10,9 +10,9 @@ from pathlib import Path
 from content_watcher import tools
 
 from . import library as library_mod
-from . import media, report, sources, voice
+from . import media, paths, report, sources, voice
 
-RUNTIME = Path.home() / ".krish-clone"
+RUNTIME = paths.runtime()
 SKIP_PARTS = {"__macosx", ".tmp.drivedownload", ".tmp.driveupload"}
 
 

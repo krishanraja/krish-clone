@@ -10,8 +10,8 @@ config/sources.json ──> sources gate ──> measure (cached) ──> who is
 | Stage | Module | Input | Output | Rerun behaviour |
 |---|---|---|---|---|
 | sources | `sources.py` | `config/sources.json` | approved folders only | refuses pending, unknown, pathless or out-of-folder files |
-| measure: voice | `voice.py`, `media.py` | audio track | sentence segments with pause level, SNR, bed flag, clipping runs, speaker similarity, loudness contour | cached in `~/.krish-clone/cache/voice` |
-| measure: face | `face.py`, `faceonnx.py` | frames at 2 fps, photos | largest face per frame: box, size, sharpness, exposure, cut-off, pose, ArcFace embedding | cached in `~/.krish-clone/cache/face` |
+| measure: voice | `voice.py`, `media.py` | audio track | sentence segments with pause level, SNR, bed flag, clipping runs, speaker similarity, loudness contour | cached under the runtime folder, `cache/voice` |
+| measure: face | `face.py`, `faceonnx.py` | frames at 2 fps, photos | largest face per frame: box, size, sharpness, exposure, cut-off, pose, ArcFace embedding | cached under the runtime folder, `cache/face` |
 | who is Krish | `face.Gallery` | all embeddings, or `--gallery` photos | centroid of the dominant identity (refuses when no clear winner) | recomputed each run |
 | judge | `voice.judge`, `face.judge` | measures | clean / review / rejected and keep / rejected, each with reasons | pure |
 | repeats | `voice.repeat_of` | loudness contours | segments whose audio is already kept from another cut are skipped | cleanest file first |
@@ -33,4 +33,9 @@ config/sources.json ──> sources gate ──> measure (cached) ──> who is
 
 ## Runtime folders
 
-`~/.krish-clone/` (on Windows `%USERPROFILE%\.krish-clone`): `models/` (buffalo_l, ECAPA), `cache/` (measures per file), `masters/` (48 kHz mono masters segments are cut from). The library itself lives in the synced Drive folder.
+krish-clone follows the shared Make Your Mind Up layout (`config/studio.json`, read through content-watcher's `layout`, with content-engine's copy winning when it sits beside this clone):
+
+- the clone: `local_roots.repos` with `{repo}` = `krish-clone`, i.e. `C:\Users\krish\dev\makeyourmindup\krish-clone`, beside content-engine, content-watcher and the rest;
+- the runtime: `local_roots.runtime` + `krish-clone`, i.e. `%LOCALAPPDATA%\makeyourmindup\krish-clone\`, holding `venv/`, `models/` (buffalo_l, ECAPA), `cache/` (measures per file) and `masters/` (48 kHz mono masters segments are cut from). `KRISH_CLONE_HOME` overrides it.
+
+The library itself lives in the synced Drive folder.
