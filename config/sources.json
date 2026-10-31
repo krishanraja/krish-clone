@@ -14,6 +14,16 @@
       "note": "22 finished cuts, about 1.8 GB, plus working and quality evidence subfolders. Voiceover review renders and approved audio are the likeliest clean voice."
     },
     {
+      "id": "inbox",
+      "name": "Video Engine Inbox (raw recordings)",
+      "drive_id": "1H-PWmcwLkKCPHShBL6SYzsLzEbpa6795",
+      "kind": "video",
+      "status": "approved",
+      "local_path": "H:\\My Drive\\Ventures\\Active Ventures\\makeyourmindup\\Video Engine\\Inbox",
+      "approval": "Krish, 2026-10-31: \"Just give me a script to do only the raw recordings from inbox and archive, because the rest definitely have music under them. All I want right now is a dump of the repository in the clone folder of audio ASAP.\"",
+      "note": "Raw takes, one file per cut at the top, no music bed. scripts/dump-raw-audio.ps1 writes each one's whole soundtrack to voice/raw-dump. The Archive holds finished cuts with music, so it is read only with -IncludeArchive."
+    },
+    {
       "id": "photos-headshots",
       "name": "Headshots for AI",
       "drive_id": "1tlaEB7sY8v1JoK9Axqofkr4kdpmfVDc-",

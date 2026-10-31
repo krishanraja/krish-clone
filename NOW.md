@@ -9,7 +9,8 @@ The engine that builds Krish's voice and likeness training library from his own 
 **North Star: not set** (`docs/NORTH_STAR.md`; a proposal waits on Krish).
 
 - **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B. 28 tests pass; CI runs them.
-- **Approved source:** `episodes`, the 3 Posts folder (Krish, 2026-10-29). Everything else is pending.
+- **Approved sources:** `episodes`, the 3 Posts folder (Krish, 2026-10-29), and `inbox`, the Video Engine Inbox of raw takes (Krish, 2026-10-31). Everything else is pending.
+- **Raw audio dump (2026-10-31):** `scripts/dump-raw-audio.ps1` writes each raw take's whole soundtrack (48 kHz, 24-bit WAV) to `voice/raw-dump` in the library, with `raw-dump.csv`; the Archive (finished cuts, music bed) only with `-IncludeArchive`. Not yet run.
 - **Proved in a cloud session on real samples** (two audio files, three photos, a test video built from them, rehearsed through an approved source twice): numbers in `docs/EVALUATION.md` and `docs/STRATEGY.md`. Not yet run on the full 3 Posts folder.
 - **Reading script built** from 13 of his long scripts and transcripts: 7,057 unique words, about 47 minutes, plus free talk to 75.
 - **No credits spent.** The existing "Krish" voice on ElevenLabs scores 0.41 against his real voice (his own clips: 0.74 to 0.84).
