@@ -24,3 +24,16 @@ Shot list:
 5. Before any upload: `clone twincheck <take>.mp4 --gallery <library>\face\photos\*.jpg` must say `ready`.
 
 HeyGen also clones the voice from the take. The plan is for the ElevenLabs PVC to be the voice; whether to drive the twin with ElevenLabs audio is a check to make in HeyGen when the twin exists (not verified here).
+
+## 3. Photo looks (HeyGen photo avatar)
+
+A photo look is the fast way to new outfits and settings; the twin take above stays the realism anchor. Checked on 2026-11-13 against HeyGen's guidance ([developer docs](https://developers.heygen.com/photo-avatar), [Avatar IV guide](https://community.heygen.com/public/resources/introducing-avatar-iv-create-talking-avatars-from-a-single-photo), [custom avatars](https://community.heygen.com/en/public/resources/custom-avatars-how-to-create-digital-twins-or-fully-ai-generated-avatars)): recent photos of only him, sharp and evenly lit, front-facing or a slight turn, neutral or subtle expression (a slightly open mouth animates better than a wide grin), no sunglasses, no hat over the forehead, half body or closer, and 10 to 15 photos to train a photo avatar group.
+
+How the seeds in the Drive `Photos` folder were chosen:
+
+1. Only photos from 2025 onward, so every look is his current face and beard.
+2. Exact duplicates dropped; the largest original kept over crops and chat copies.
+3. Measured: long side at least 1600 px, the face at least about 650 px tall, sharp on the face, one person.
+4. Judged by eye against the guidance above, then one photo per distinct outfit and setting.
+
+Ten seeds sit at the top of `Photos`: eight distinct looks plus two more angles of the plain-wall anchor, so the set doubles as the 10 to 15 photo training group. Everything else is flat in `Photos/All other photos`. The anchor photos also make a good identity gallery for `clone twincheck`.

@@ -1,0 +1,7 @@
+# 2026-11-13: photo seeds for HeyGen looks, Photos folder cleaned
+
+- Status: 314 files across the Drive `Photos` tree inventoried; 69 de-duplicated photos from 2025 onward measured (resolution, face size, sharpness, light) and judged against HeyGen's photo guidance (`docs/CAPTURE.md` section 3). Ten seeds now sit at the top of `Photos` (eight distinct looks plus two extra angles of the anchor). Every other file was moved, not deleted, into one flat subfolder, `Photos/All other photos` (the former MORE folder, renamed). An undo log (file id, old folder, old name) is in that subfolder. No HeyGen or ElevenLabs call was made; no credits spent.
+- Waiting on Krish: whether to trash the emptied legacy subfolders, the two 70-byte macOS junk files and about 36 exact duplicates; and where non-photo personal scans found in the old MORE folder should live outside the clone library.
+- Next step: pick the looks to build first in HeyGen and approve that spend when it happens. The HD recordings in the Inbox were not checked here (Drive's connector cannot bring videos over 10 MB into a cloud session); run `clone twincheck` on one at home before treating it as the twin take.
+- Note: `config/sources.json` still points `photos-headshots` at the old "krish headshots for ai" folder, which is now empty; its photos are in `All other photos`. Source status unchanged.
+- North Star check: not set. This moves the likeness half: the seeds are current, sharp, single-subject photos, so the first HeyGen looks start from his face as it is now.
