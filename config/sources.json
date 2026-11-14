@@ -24,6 +24,16 @@
       "note": "Raw takes, one file per cut at the top, no music bed. scripts/dump-raw-audio.ps1 writes each one's whole soundtrack to voice/raw-dump. The Archive holds finished cuts with music, so it is read only with -IncludeArchive."
     },
     {
+      "id": "library",
+      "name": "Krish Clone - Assets (the library folder's own recordings)",
+      "drive_id": "1dLmAXhPxd-hiZCEjEiVgrL9UARjQgMmI",
+      "kind": "video",
+      "status": "approved",
+      "local_path": "H:\\My Drive\\Ventures\\Side Hustles, Tools & Projects\\Krish Clone - Assets",
+      "approval": "Krish, 2026-11-14, decision 5.7 (inventory only, no spend): \"I approve 5.7, add the library source\"",
+      "note": "Inventory only: no upload, clone or other spend follows from this approval. Point inventory at Video, voice/uncompressed and voice/archive; never at the engine's own output (voice/clean, voice/review, face) or at voice/compressed, which repeats voice/uncompressed as M4A."
+    },
+    {
       "id": "photos-headshots",
       "name": "Headshots for AI",
       "drive_id": "1tlaEB7sY8v1JoK9Axqofkr4kdpmfVDc-",

@@ -17,11 +17,13 @@ def config(directory: Path, **status) -> Path:
 class SourcesTest(unittest.TestCase):
     def test_shipped_config_approves_only_what_krish_approved(self):
         shipped = {s.id: s for s in sources.load()}
-        self.assertEqual([k for k, s in shipped.items() if s.status == "approved"], ["episodes", "inbox"])
+        self.assertEqual([k for k, s in shipped.items() if s.status == "approved"], ["episodes", "inbox", "library"])
         self.assertIn("Krish, 2026-10-29", shipped["episodes"].approval)
         self.assertTrue(shipped["episodes"].local_path.endswith("3 Posts"))
         self.assertIn("Krish, 2026-10-31", shipped["inbox"].approval)
         self.assertTrue(shipped["inbox"].local_path.endswith("Video Engine\\Inbox"))
+        self.assertIn("Krish, 2026-11-14, decision 5.7", shipped["library"].approval)
+        self.assertTrue(shipped["library"].local_path.endswith("Krish Clone - Assets"))
 
     def test_pending_unknown_and_pathless_sources_are_refused(self):
         with tempfile.TemporaryDirectory() as tmp:

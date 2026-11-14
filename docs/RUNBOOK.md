@@ -55,7 +55,15 @@ Get-ChildItem "$Library\Video\*.mp4" | ForEach-Object { & $clone twincheck $_.Fu
 & $clone evaluate --real (Get-ChildItem "$Library\voice\clean\*.wav" | Select-Object -First 20).FullName --clone "<clone audio>"
 ```
 
-`twincheck` and `evaluate` need no source. The recordings kept in the library itself (`Video`, `voice/uncompressed`, `voice/archive`) are outside both approved sources, so `inventory` and `harvest` refuse them until Krish approves that folder as a source.
+`twincheck` and `evaluate` need no source.
+
+The recordings kept in the library itself are the approved source `library` (Krish, 2026-11-14, decision 5.7), for inventory only: it measures them and writes only `manifest.json` and `inventory.md`, copies no media and spends nothing. Point it at the three raw folders, never the whole library, so it does not re-read its own output or the `voice/compressed` copies:
+
+```powershell
+& $clone inventory "$Library\Video" "$Library\voice\uncompressed" "$Library\voice\archive" --source library --out $Library
+```
+
+A harvest of these recordings, and any upload, waits for Krish's yes.
 
 ## Adding a source
 
