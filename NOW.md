@@ -4,7 +4,7 @@
 
 The engine that builds Krish's voice and likeness training library from his own recordings and photos, on his own machine, exports it in each platform's format and judges the clones that come back. See `README.md`; the reasoning is in `docs/STRATEGY.md`.
 
-## Where it is right now (as of 2026-10-29)
+## Where it is right now (as of 2026-11-13)
 
 **North Star: not set** (`docs/NORTH_STAR.md`; a proposal waits on Krish).
 
@@ -13,6 +13,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 - **Raw audio dump (2026-10-31):** `scripts/dump-raw-audio.ps1` writes each raw take's whole soundtrack (48 kHz, 24-bit WAV) to `voice/raw-dump` in the library, with `raw-dump.csv`; the Archive (finished cuts, music bed) only with `-IncludeArchive`. Not yet run.
 - **Proved in a cloud session on real samples** (two audio files, three photos, a test video built from them, rehearsed through an approved source twice): numbers in `docs/EVALUATION.md` and `docs/STRATEGY.md`. Not yet run on the full 3 Posts folder.
 - **Reading script built** from 13 of his long scripts and transcripts: 7,057 unique words, about 47 minutes, plus free talk to 75.
+- **Photo seeds ready (2026-11-13):** ten HeyGen photo-look seeds at the top of the Drive `Photos` folder; everything else flat in `Photos/All other photos`. Rubric in `docs/CAPTURE.md` section 3.
 - **No credits spent.** The existing "Krish" voice on ElevenLabs scores 0.41 against his real voice (his own clips: 0.74 to 0.84).
 
 ## What is next and what is waiting on Krish
