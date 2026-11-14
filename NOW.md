@@ -22,6 +22,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`; a proposal waits on Krish), so there is no number yet.
 
+- `config/sources.json` holds a new approved source, `library`, the library folder's own recordings, with Krish's words of 2026-11-14 ("I approve 5.7, add the library source"). Inventory only: nothing uploaded, cloned or spent, no ElevenLabs or HeyGen call. No other source changed. (2026-11-14)
 - closeout notes now fold into NOW.md on the default branch (.github/workflows/closeout-fold.yml runs the harness's own fold, after checking the hook is the ai-harness copy by sha256). (2026-11-14)
 - **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B, and the raw audio dump (`scripts/dump-raw-audio.ps1`). 28 tests pass; CI runs them.
 - **Approved sources:** `episodes`, the 3 Posts folder (Krish, 2026-10-29), and `inbox`, the Video Engine Inbox of raw takes (Krish, 2026-10-31). Everything else is pending.
@@ -38,6 +39,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What changed recently
 
+- 2026-11-14 Krish approved the library folder's own recordings as a source (decision 5.7), inventory only; the runbook gives the inventory command.
 - 2026-11-14 Stranded work landed (the raw audio dump of 31 Oct, the photo-seed rubric of 13 Nov); NOW.md and the runbook say what the library holds and give the exact home-computer commands.
 - 2026-11-13 Photo seeds for HeyGen looks: ten current, sharp, single-subject photos at the top of `Photos`, judged against HeyGen's photo guidance (`docs/CAPTURE.md` section 3).
 - 2026-10-29 First build, and the first source (`episodes`, the 3 Posts folder) approved by Krish.
@@ -45,7 +47,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-14): write each session's closeout as now-notes/YYYY-MM-DD-<slug>.md with Status:, Next: and the North Star check line, and let the fold place it.
+- Next (2026-11-14): on a home computer, run the inventory on `Video`, `voice/uncompressed` and `voice/archive` with `--source library` (`docs/RUNBOOK.md`, "Next: the free local evaluation") and read `inventory.md`. A harvest of these recordings waits for Krish.
 **Next action: the free local evaluation, on a home computer.** It reads face and voice media, so it runs only on Krish's machine; a cloud session never touches those files. The exact commands are in `docs/RUNBOOK.md`, "Next: the free local evaluation":
 
 1. Install or update, then `clone doctor`.
