@@ -1,3 +1,17 @@
+---
+repo: krishanraja/krish-clone
+product: krish-clone (voice and likeness training library)
+as_of: 2026-11-14
+head: 507670c
+lifecycle: building
+production_url: none (runs on Krish's own machines)
+state_doc: README.md
+history_log: docs/history/now-notes/
+truth_files: [docs/NORTH_STAR.md, config/sources.json, docs/STRATEGY.md]
+authority_order: [docs/NORTH_STAR.md, AGENTS.md, docs/STRATEGY.md, README.md]
+steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOOK.md
+---
+
 # krish-clone: where it is right now
 
 ## What it is
@@ -6,7 +20,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## Where it is right now (as of 2026-11-14)
 
-**North Star: not set** (`docs/NORTH_STAR.md`; a proposal waits on Krish).
+<!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`; a proposal waits on Krish), so there is no number yet.
 
 - **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B, and the raw audio dump (`scripts/dump-raw-audio.ps1`). 28 tests pass; CI runs them.
 - **Approved sources:** `episodes`, the 3 Posts folder (Krish, 2026-10-29), and `inbox`, the Video Engine Inbox of raw takes (Krish, 2026-10-31). Everything else is pending.
@@ -21,7 +35,14 @@ The engine that builds Krish's voice and likeness training library from his own 
 - **Reading script built** from 13 of his long scripts and transcripts: 7,057 unique words, about 47 minutes, plus free talk to 75.
 - **No credits spent.** The existing "Krish" voice on ElevenLabs scores 0.41 against his real voice (his own clips: 0.74 to 0.84).
 
-## What is next
+## What changed recently
+
+- 2026-11-14 Stranded work landed (the raw audio dump of 31 Oct, the photo-seed rubric of 13 Nov); NOW.md and the runbook say what the library holds and give the exact home-computer commands.
+- 2026-11-13 Photo seeds for HeyGen looks: ten current, sharp, single-subject photos at the top of `Photos`, judged against HeyGen's photo guidance (`docs/CAPTURE.md` section 3).
+- 2026-10-29 First build, and the first source (`episodes`, the 3 Posts folder) approved by Krish.
+- The closeout notes behind these lines are kept verbatim in `docs/history/now-notes/`.
+
+## What is next and what is waiting on Krish
 
 **Next action: the free local evaluation, on a home computer.** It reads face and voice media, so it runs only on Krish's machine; a cloud session never touches those files. The exact commands are in `docs/RUNBOOK.md`, "Next: the free local evaluation":
 
@@ -35,3 +56,6 @@ The recordings that sit in the library itself (the two "Krish Voice Clone" recor
 Spend stays behind Krish's yes, asked for when it happens: the ElevenLabs Professional Voice Clone upload and the HeyGen likeness (twin or photo looks).
 
 Also Krish's: the North Star.
+
+- Next (2026-11-14): the free local evaluation on a home computer (`docs/RUNBOOK.md`, "Next: the free local evaluation").
+- North Star check (2026-11-14): holds.
