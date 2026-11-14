@@ -24,3 +24,9 @@ python -m unittest discover -s tests -t . -v
 ```
 
 Close out: before a session that changed the repository ends, write `now-notes/YYYY-MM-DD-<slug>.md` with `Status:`, `Next:` and the line `North Star check (YYYY-MM-DD): holds.` with nothing in front of it; it folds into `NOW.md` on main.
+
+<!-- krish-repo-admin:start brain=c5bc0e51e137 sha=0cc207a2c492 -->
+## Administer this repository
+
+Use `docs/HARNESS_CONTEXT.md` for the owning workflow, source of truth and checks. Preserve the goal and accepted decisions when a revision changes one part; explain material trade-offs. Verify the downstream result. Record corrections and observed outcomes through the existing capture path. Experimental results retain their conditions; inferred requirements remain proposals.
+<!-- krish-repo-admin:end -->
