@@ -22,6 +22,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`; a proposal waits on Krish), so there is no number yet.
 
+- closeout notes now fold into NOW.md on the default branch (.github/workflows/closeout-fold.yml runs the harness's own fold, after checking the hook is the ai-harness copy by sha256). (2026-11-14)
 - **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B, and the raw audio dump (`scripts/dump-raw-audio.ps1`). 28 tests pass; CI runs them.
 - **Approved sources:** `episodes`, the 3 Posts folder (Krish, 2026-10-29), and `inbox`, the Video Engine Inbox of raw takes (Krish, 2026-10-31). Everything else is pending.
 - **The recordings and photos exist.** The library folder on Drive (`Krish Clone - Assets`, read by name and count on 2026-11-14, no file opened) holds:
@@ -44,6 +45,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What is next and what is waiting on Krish
 
+- Next (2026-11-14): write each session's closeout as now-notes/YYYY-MM-DD-<slug>.md with Status:, Next: and the North Star check line, and let the fold place it.
 **Next action: the free local evaluation, on a home computer.** It reads face and voice media, so it runs only on Krish's machine; a cloud session never touches those files. The exact commands are in `docs/RUNBOOK.md`, "Next: the free local evaluation":
 
 1. Install or update, then `clone doctor`.
@@ -57,5 +59,4 @@ Spend stays behind Krish's yes, asked for when it happens: the ElevenLabs Profes
 
 Also Krish's: the North Star.
 
-- Next (2026-11-14): the free local evaluation on a home computer (`docs/RUNBOOK.md`, "Next: the free local evaluation").
 - North Star check (2026-11-14): holds.
