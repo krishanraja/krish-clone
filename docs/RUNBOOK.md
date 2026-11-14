@@ -30,6 +30,33 @@ Expect roughly an hour or two on a home computer for about 1.8 GB of video (spee
 
 Steps on their own: `-Step inventory`, `-Step harvest`, `-Step script`.
 
+## Next: the free local evaluation
+
+Everything here runs on the home computer and spends nothing. It reads face and voice media, so it never runs in a cloud session. In PowerShell:
+
+```powershell
+$clone   = "$env:LOCALAPPDATA\makeyourmindup\krish-clone\venv\Scripts\clone.exe"
+$Library = "H:\My Drive\Ventures\Side Hustles, Tools & Projects\Krish Clone - Assets"
+$Inbox   = "H:\My Drive\Ventures\Active Ventures\makeyourmindup\Video Engine\Inbox"
+
+# 1. Install or update (an existing clone is updated, never replaced), then check.
+irm https://raw.githubusercontent.com/krishanraja/krish-clone/main/scripts/bootstrap.ps1 | iex
+& $clone doctor
+
+# 2. Inventory, then harvest, both approved sources. Read inventory.md before each harvest.
+powershell -ExecutionPolicy Bypass -File "$env:USERPROFILE\dev\makeyourmindup\krish-clone\scripts\run-first-sources.ps1"
+& $clone inventory $Inbox --source inbox --out $Library
+& $clone harvest   $Inbox --source inbox --out $Library
+
+# 3. Twin pre-flight on each phone take, against the headshots.
+Get-ChildItem "$Library\Video\*.mp4" | ForEach-Object { & $clone twincheck $_.FullName --gallery (Get-ChildItem "$Library\Photos\*.png").FullName }
+
+# 4. His own spread from the harvested clean clips, and any clone audio judged against it.
+& $clone evaluate --real (Get-ChildItem "$Library\voice\clean\*.wav" | Select-Object -First 20).FullName --clone "<clone audio>"
+```
+
+`twincheck` and `evaluate` need no source. The recordings kept in the library itself (`Video`, `voice/uncompressed`, `voice/archive`) are outside both approved sources, so `inventory` and `harvest` refuse them until Krish approves that folder as a source.
+
 ## Adding a source
 
 Only Krish approves a source, one at a time:
