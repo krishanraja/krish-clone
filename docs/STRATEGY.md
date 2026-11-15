@@ -18,7 +18,7 @@ Written 2026-10-29 from every folder Krish named, the code of the three reposito
 
 ## A finding worth acting on
 
-The workspace already holds a cloned voice called "Krish". Its free preview scores **0.41** against his real voice, where his own clips score 0.74 to 0.84 and ten other men -0.24 to 0.20. It is not him yet. The Professional Voice Clone from clean audio is the fix; the A/B test is how to know.
+The workspace already holds a cloned voice called "Krish". Its free preview scores **0.41** against his real voice, where his own clips score 0.74 to 0.84 and ten other men -0.24 to 0.20. It is not him yet. The Professional Voice Clone from clean audio is the fix. Krish judges a clone on his own say-so (Ruling, Krish, 2026-11-15), with the A/B test as optional evidence; on 2026-11-15 he approved the ElevenLabs voice "Krish Remix", not this one (`docs/REGISTRY.md`).
 
 ## The three repositories
 
@@ -33,7 +33,7 @@ The workspace already holds a cloned voice called "Krish". Its free preview scor
 1. **Inventory** (no spend). `clone inventory` on 3 Posts. Gate: Krish reads `inventory.md`.
 2. **Library** (no spend). `clone harvest` into Krish Clone - Assets.
 3. **Capture** (no spend). The voice session from `reading-script.md`; the twin take, passed by `clone twincheck`.
-4. **Train and judge** (spend, each step approved when it happens). Upload the exported MP3s to a Professional Voice Clone; upload the twin take to HeyGen. Pass: `clone evaluate` passes and at most 60% of listeners pick the clone in the blind A/B.
+4. **Train and judge** (spend, each step approved when it happens). Upload the exported MP3s to a Professional Voice Clone; upload the twin take to HeyGen. Pass: Krish approves the clone on his own say-so, and it goes in the registry (`docs/REGISTRY.md`); `clone evaluate` and the blind A/B, where at most 60% of listeners pick the clone, are optional evidence (Ruling, Krish, 2026-11-15). Approved on 2026-11-15: the ElevenLabs voice "Krish Remix", and the HeyGen avatar "Krish Raja" with its voice "Krish Voice". Each finished piece made with them still comes to him before it goes out.
 
 ## Still open, and why
 

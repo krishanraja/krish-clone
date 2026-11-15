@@ -1,0 +1,39 @@
+{
+  "format": "krish-clone.synthetic-approvals/1",
+  "note": "One entry per synthetic voice or likeness Krish has approved: his exact words, the date, and the sha256 of exactly what he approved. His own say-so is enough (Ruling, Krish, 2026-11-15); a scored listening panel is optional. platform_ref is the platform's id for the clone, a reference and never a secret. Only his approval adds an entry (clone registry add); docs/REGISTRY.md has the format and how other repositories read it.",
+  "approvals": [
+    {
+      "name": "krish-voice-elevenlabs",
+      "kind": "voice",
+      "platform": "elevenlabs",
+      "basis": "own_say_so",
+      "platform_name": "Krish Remix",
+      "platform_ref": "FOupAntbAMhJ9n9Q4dfC",
+      "approved_sha256": "e2e0cbaea9545a5e455cc60e4d77f3b8906b4c9c7a977efb330a579f5de4f9d1",
+      "approved_words": "eleven labs correct voice is FOupAntbAMhJ9n9Q4dfC,HeyGen avatar 'Krish Raja' + 'Krish Voice' (Recommended),ElevenLabs voice 'Krish'",
+      "approved_on": "2026-11-15"
+    },
+    {
+      "name": "krish-avatar-heygen",
+      "kind": "likeness",
+      "platform": "heygen",
+      "basis": "own_say_so",
+      "platform_name": "Krish Raja",
+      "platform_ref": "fa0069900c1049acbadc045c7866cdc5",
+      "approved_sha256": "f63dd89366687f06efcc9ace8fe9b5d3191e7323177b833883cd86601da20e75",
+      "approved_words": "eleven labs correct voice is FOupAntbAMhJ9n9Q4dfC,HeyGen avatar 'Krish Raja' + 'Krish Voice' (Recommended),ElevenLabs voice 'Krish'",
+      "approved_on": "2026-11-15"
+    },
+    {
+      "name": "krish-voice-heygen",
+      "kind": "voice",
+      "platform": "heygen",
+      "basis": "own_say_so",
+      "platform_name": "Krish Voice",
+      "platform_ref": "76d9dedcfa2d4f628beb43090e74e473",
+      "approved_sha256": "49b63e7540867514c4940b9ef516de0a2540ca4bd84528e84b88be0b554e4fd1",
+      "approved_words": "eleven labs correct voice is FOupAntbAMhJ9n9Q4dfC,HeyGen avatar 'Krish Raja' + 'Krish Voice' (Recommended),ElevenLabs voice 'Krish'",
+      "approved_on": "2026-11-15"
+    }
+  ]
+}
