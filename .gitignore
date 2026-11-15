@@ -15,3 +15,6 @@ library/
 *.png
 *.webp
 *.npy
+# The listener list names real people, and keys reveal answers: never committed.
+listeners*.json
+*do-not-share*

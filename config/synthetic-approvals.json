@@ -1,0 +1,5 @@
+{
+  "format": "krish-clone.synthetic-approvals/1",
+  "note": "One entry per synthetic voice or likeness Krish has approved: his exact words, the date, and the sha256 of the scored A/B record he approved. Names and hashes only, never a platform id. Only his approval adds an entry (clone registry add); docs/REGISTRY.md has the format and how other repositories read it.",
+  "approvals": []
+}

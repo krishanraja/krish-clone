@@ -250,11 +250,73 @@ def _abpack(args) -> int:
 
 
 def _abscore(args) -> int:
-    from . import evaluate
+    from . import evaluate, panel
 
+    if args.record:
+        missing = [flag for flag, value in (("--panel", args.panel), ("--clone-name", args.clone_name),
+                                            ("--kind", args.kind), ("--platform", args.platform)) if not value]
+        if missing:
+            raise panel.Refused(f"--record needs {', '.join(missing)}")
+        record, sha = panel.write_record(Path(args.key), Path(args.answers), Path(args.panel), Path(args.record),
+                                         name=args.clone_name, kind=args.kind, platform=args.platform)
+        result = record["score"]
+        print(json.dumps(result, indent=2))
+        print(f"record: {args.record}")
+        print(f"scored pack sha256: {sha}")
+        print("Krish approves this sha256 in his own words; then: clone registry add --record <record> --words ... --on ...")
+        return 0 if result["verdict"] == "pass" else 1
     result = evaluate.ab_score(Path(args.key), Path(args.answers))
     print(json.dumps(result, indent=2))
     return 0 if result["verdict"] == "pass" else 1
+
+
+def _abpanel(args) -> int:
+    from . import panel
+
+    built = panel.build(Path(args.key), Path(args.listeners), Path(args.out), seed=args.seed)
+    print(f"panel: {args.out} ({len(built['items'])} listeners, {built['pairs']} pairs each). "
+          f"Keep {panel.PANEL_KEY} away from the listeners.")
+    if built["listeners_approved"]:
+        print("Krish approved the listener list: each listener's page may now be made through SendLinks, one link each.")
+    else:
+        print("Krish has not approved the listener list: no page may be made from this panel until he does.")
+    return 0
+
+
+def _abrecord(args) -> int:
+    from . import panel
+
+    count = panel.record_answers(Path(args.panel), args.listener, Path(args.sheet))
+    print(f"recorded {count} answers for {args.listener} in {Path(args.panel) / panel.ANSWERS}")
+    return 0
+
+
+def _registry(args) -> int:
+    from . import registry
+
+    path = Path(args.file)
+    if args.action == "add":
+        if not (args.record and args.words and args.on):
+            raise registry.RegistryError("add needs --record, --words (Krish's exact words) and --on")
+        entry = registry.add(path, Path(args.record), args.words, args.on)
+        print(f"added {entry.name} ({entry.kind}, {entry.platform}), scored pack {entry.scored_pack_sha256}")
+        return 0
+    if args.action == "withdraw":
+        if not (args.name and args.words and args.on):
+            raise registry.RegistryError("withdraw needs NAME, --words (Krish's exact words) and --on")
+        entry = registry.withdraw(path, args.name, args.words, args.on)
+        print(f"withdrawn {entry.name} on {args.on}")
+        return 0
+    approvals = registry.load(path)
+    if args.action == "check":
+        print(f"ok: {len(approvals)} entr{'y' if len(approvals) == 1 else 'ies'}, format {registry.FORMAT}")
+        return 0
+    if not approvals:
+        print("no synthetic voice or likeness is approved")
+    for a in approvals:
+        state = "active" if a.active else f"withdrawn {a.withdrawn['on']}"
+        print(f"{a.name:24}{a.kind:10}{a.platform:12}{a.approved_on}  {state}  {a.scored_pack_sha256}")
+    return 0
 
 
 def _doctor(args) -> int:
@@ -367,17 +429,44 @@ def parser() -> argparse.ArgumentParser:
     sco = sub.add_parser("abscore", help="score listeners' answers against the key")
     sco.add_argument("--key", required=True)
     sco.add_argument("--answers", required=True, help="CSV: listener,pair,choice (A or B = which one is the clone)")
+    sco.add_argument("--record", help="write the scored record Krish approves (needs --panel, --clone-name, --kind, --platform)")
+    sco.add_argument("--panel", help="the panel folder the answers came from (clone abpanel)")
+    sco.add_argument("--clone-name", help="the clone's name, such as krish-voice-1 (a name, never a platform id)")
+    sco.add_argument("--kind", choices=["voice", "likeness"])
+    sco.add_argument("--platform", choices=["elevenlabs", "heygen"])
+    pa = sub.add_parser("abpanel", help="one shuffled pair set per listener, from a pack and the local listener list")
+    pa.add_argument("--key", required=True, help="the pack's KEY-do-not-share.json")
+    pa.add_argument("--listeners", required=True, help="the local listener list (never committed; docs/EVALUATION.md)")
+    pa.add_argument("--out", required=True)
+    pa.add_argument("--seed", type=int, default=None)
+    rec = sub.add_parser("abrecord", help="record one listener's filled sheet into the panel's answers.csv")
+    rec.add_argument("--panel", required=True)
+    rec.add_argument("--listener", required=True, help="the listener's id, such as L03")
+    rec.add_argument("--sheet", required=True, help="their filled sheet.csv")
+    reg = sub.add_parser("registry", help="the approved synthetic voices and likenesses (config/synthetic-approvals.json)")
+    reg.add_argument("action", nargs="?", choices=["list", "check", "add", "withdraw"], default="list")
+    reg.add_argument("name", nargs="?", help="withdraw: the clone's name")
+    reg.add_argument("--file", default=None, help="the registry file (default: config/synthetic-approvals.json)")
+    reg.add_argument("--record", help="add: the scored record Krish approved")
+    reg.add_argument("--words", help="Krish's exact words")
+    reg.add_argument("--on", help="the date he said them, YYYY-MM-DD")
     return top
 
 
 def main(argv: list[str] | None = None) -> int:
+    from . import panel, registry
+
     args = parser().parse_args(argv)
-    handlers = {"export": _export, "twincheck": _twin, "doctor": _doctor, "sources": _sources, "script": _script, "evaluate": _evaluate, "abpack": _abpack, "abscore": _abscore}
+    if args.command == "registry" and args.file is None:
+        args.file = str(registry.DEFAULT)
+    handlers = {"export": _export, "twincheck": _twin, "doctor": _doctor, "sources": _sources, "script": _script,
+                "evaluate": _evaluate, "abpack": _abpack, "abscore": _abscore, "abpanel": _abpanel,
+                "abrecord": _abrecord, "registry": _registry}
     try:
         if args.command in handlers:
             return handlers[args.command](args)
         return run(args, write_media=args.command == "harvest")
-    except sources.NotApproved as refused:
+    except (sources.NotApproved, panel.Refused, registry.RegistryError, FileExistsError) as refused:
         print(f"refused: {refused}")
         return 3
 
