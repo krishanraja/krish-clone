@@ -15,18 +15,20 @@ Written 2026-10-29 from every folder Krish named, the code of the three reposito
 | Tall and wide cuts would double count minutes | **Closed.** Repeats are found acoustically and skipped. |
 | Identity needed photos from folders not yet approved | **Closed.** The gallery defaults to the dominant face in the approved source. |
 | Thresholds were guesses | **Calibrated** on other voices and other faces (`docs/EVALUATION.md`). |
+| No test that a generated face is still him | **Closed in code, 2026-11-15.** `clone likeness` judges any generator's stills or video against his own photos: fidelity, drift within a clip, the face staying in shot (`docs/EVALUATION.md`). Tested on synthetic faces; his own baseline (an existing HeyGen video against his seed photos) runs at home. |
 
 ## A finding worth acting on
 
 The workspace already holds a cloned voice called "Krish". Its free preview scores **0.41** against his real voice, where his own clips score 0.74 to 0.84 and ten other men -0.24 to 0.20. It is not him yet. The Professional Voice Clone from clean audio is the fix. Krish judges a clone on his own say-so (Ruling, Krish, 2026-11-15), with the A/B test as optional evidence; on 2026-11-15 he approved the ElevenLabs voice "Krish Remix", not this one (`docs/REGISTRY.md`).
 
-## The three repositories
+## Outside repositories evaluated
 
 | Repository | Verdict | Why |
 |---|---|---|
 | contentarchives | Its approach, reused | insightface buffalo_l (ArcFace) over his library with a 0.55 threshold measured on it. It never scored quality; this engine does. |
 | cmusatyalab/openface | Replaced, two ideas kept | nn4.small2 (about 93% on LFW), no pose, dlib on Windows. Kept: the largest face is the subject; accept by distance to a gallery. |
 | debpalash/VoiceStudio | Ideas only | AGPL. Its pipeline ideas informed this one; SpeechBrain ECAPA (Apache-2.0) does the speaker scoring here. |
+| Anil-matcha/Open-Generative-AI (2026-11-15) | Not adopted | A studio over the MuAPI aggregator: the same model families Higgsfield already reaches, his face sent to a new processor for any identity work, and no local path that holds a face. It exposed the missing likeness test, now `clone likeness` (`docs/GENERATORS.md`). |
 
 ## Phases and gates
 

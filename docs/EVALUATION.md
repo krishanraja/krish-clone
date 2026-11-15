@@ -19,6 +19,38 @@ So the speaker floor used to reject other voices from the library (0.45) sits in
 
 ArcFace (buffalo_l). Calibration on 2026-10-29: three photos of Krish against their own centroid 0.85 to 0.89; seven strangers (insightface's sample photos) -0.07 to 0.06. The identity floor is 0.55, contentarchives' threshold measured on his own library.
 
+## Generated likeness (`clone likeness`)
+
+The face counterpart of `clone evaluate`, for any generator's output: a HeyGen avatar video, a new look, a still or clip from another model. It runs on Krish's own machine, reads the files and writes nothing, and calls no platform.
+
+ArcFace (buffalo_l, as above) embeds the largest face in each real photo or sampled frame (2 per second) and in each generated one. The bar is real Krish against real Krish: each real file is scored against the centroid of the other real files, each file weighing the same so one long video cannot outvote ten photos. A generated file passes when all three hold:
+
+| Check | Rule | Why |
+|---|---|---|
+| Fidelity | its median identity reaches the 5th percentile of the real files' medians | judged as a real file of him would be, the voice test's rule |
+| No drift | its worst 5% of faces no more than 0.10 below that same floor | a clip that is him on average can still stop being him for a few seconds |
+| Face present | a face in at least 95% of sampled frames | the bar `clone twincheck` sets for a real take |
+
+At least three real files are needed. How closely the generated files agree with each other is reported (`clone_vs_clone`) but not judged: looks that each pass can still disagree.
+
+```powershell
+clone likeness --real (Get-ChildItem "<library>\Photos\*.png").FullName --clone "<generated stills or video>"
+```
+
+Identity is necessary, not sufficient: a clip can be plainly him and still look generated (skin, teeth, blinking, lip sync). That is what the blind A/B below and Krish's own eye judge.
+
+The library's floor of 0.55 is not the drift line here. It separates Krish from the real other people in his footage, but generated lookalikes, faces made from the same description, sit above it. The 0.10 margin is provisional: it is set from the synthetic test and is recalibrated on his first real baseline.
+
+Measured on synthetic faces only, 2026-11-15 (no face of Krish's; method in `docs/GENERATORS.md`), scored against one synthetic person:
+
+| Generated | Identity |
+|---|---|
+| Light variations of the synthetic person, the stand-in for real photos (each against the others) | 0.888 to 0.952 |
+| New stills made from one still of that person | 0.876 to 0.913 |
+| The same description in words, new seeds, no reference: lookalikes | 0.542 to 0.675 |
+| A 10 second clip of the stills made from that still | median 0.877, worst 5% 0.874 |
+| The same clip with 2 of its 10 seconds swapped for a lookalike | median 0.873, worst 5% 0.627: caught as drift |
+
 ## Blind A/B (`clone abpack`, `clone abscore`)
 
 Optional. Krish approves a synthetic voice or likeness of himself on his own say-so; no listening panel is required (Ruling, Krish, 2026-11-15; "What Krish approves" below). The A/B and the panel stay as tools for when he wants evidence beyond his own ear.

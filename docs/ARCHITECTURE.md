@@ -21,6 +21,7 @@ config/sources.json ──> sources gate ──> measure (cached) ──> who is
 | export | `export.py` | library | `elevenlabs-pvc-NN.mp3` at the PVC spec | refuses to overwrite |
 | twin check | `twin.py` | one recording | ready / reshoot, per HeyGen rejection reason | pure |
 | evaluate | `evaluate.py` | real and cloned clips | speaker-similarity verdict, blind A/B pack and score | pack refuses to overwrite |
+| likeness | `likeness.py` | real photos or video, generated stills or video | face identity per generated file: fidelity, drift, presence, and how the files agree | pure, writes nothing |
 
 ## Decisions worth knowing
 

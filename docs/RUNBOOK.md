@@ -53,9 +53,14 @@ Get-ChildItem "$Library\Video\*.mp4" | ForEach-Object { & $clone twincheck $_.Fu
 
 # 4. His own spread from the harvested clean clips, and any clone audio judged against it.
 & $clone evaluate --real (Get-ChildItem "$Library\voice\clean\*.wav" | Select-Object -First 20).FullName --clone "<clone audio>"
+
+# 5. The likeness baseline: a HeyGen video already made with the approved avatar "Krish Raja", judged against
+#    the seed photos at the top of Photos (not "All other photos"). Use a video that already exists; making a
+#    new one is a generation and waits for his yes. Any other generator's output is judged the same way later.
+& $clone likeness --real (Get-ChildItem "$Library\Photos\*.png").FullName --clone "<an existing HeyGen video>.mp4"
 ```
 
-`twincheck` and `evaluate` need no source.
+`twincheck`, `evaluate` and `likeness` need no source.
 
 The recordings kept in the library itself are the approved source `library` (Krish, 2026-11-14, decision 5.7), for inventory only: it measures them and writes only `manifest.json` and `inventory.md`, copies no media and spends nothing. Point it at the three raw folders, never the whole library, so it does not re-read its own output or the `voice/compressed` copies:
 
@@ -98,6 +103,7 @@ clone twincheck "<recording>.mp4" --gallery "<library>\face\photos\*.jpg"
 
 ```powershell
 clone evaluate --real <5+ real clips> --clone <clone clips>
+clone likeness --real (Get-ChildItem "<library>\Photos\*.png").FullName --clone "<generated stills or video>"
 clone abpack --real <real clips> --clone <clone clips> --out <folder>
 clone abscore --key <folder>\KEY-do-not-share.json --answers answers.csv
 ```

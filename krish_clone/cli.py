@@ -241,6 +241,16 @@ def _evaluate(args) -> int:
     return 0 if result["verdict"] == "pass" else 1
 
 
+def _likeness(args) -> int:
+    from . import face, likeness
+
+    detector = face.Detector("onnx", RUNTIME)
+    result = likeness.likeness(_files([Path(p) for p in args.real]), _files([Path(p) for p in args.clone]), detector,
+                               fps=args.fps)
+    print(json.dumps(result, indent=2))
+    return 0 if result["verdict"] == "pass" else 1
+
+
 def _abpack(args) -> int:
     from . import evaluate
 
@@ -435,6 +445,10 @@ def parser() -> argparse.ArgumentParser:
     ev = sub.add_parser("evaluate", help="score cloned clips against real ones (speaker similarity)")
     ev.add_argument("--real", nargs="+", required=True)
     ev.add_argument("--clone", nargs="+", required=True)
+    li = sub.add_parser("likeness", help="score generated stills or video against real Krish (face identity, drift, presence)")
+    li.add_argument("--real", nargs="+", required=True, help="real photos or videos of Krish (files or folders, at least three)")
+    li.add_argument("--clone", nargs="+", required=True, help="generated stills or videos to judge (files or folders)")
+    li.add_argument("--fps", type=float, default=2.0, help="frames sampled per second of video")
     ab = sub.add_parser("abpack", help="build a blind A/B listening pack and its answer key")
     ab.add_argument("--real", nargs="+", required=True)
     ab.add_argument("--clone", nargs="+", required=True)
@@ -479,7 +493,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "registry" and args.file is None:
         args.file = str(registry.DEFAULT)
     handlers = {"export": _export, "twincheck": _twin, "doctor": _doctor, "sources": _sources, "script": _script,
-                "evaluate": _evaluate, "abpack": _abpack, "abscore": _abscore, "abpanel": _abpanel,
+                "evaluate": _evaluate, "likeness": _likeness, "abpack": _abpack, "abscore": _abscore, "abpanel": _abpanel,
                 "abrecord": _abrecord, "registry": _registry}
     try:
         if args.command in handlers:
