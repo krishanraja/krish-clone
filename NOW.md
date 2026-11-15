@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/krish-clone
 product: krish-clone (voice and likeness training library)
-as_of: 2026-11-14
+as_of: 2026-11-15
 head: 507670c
 lifecycle: building
 production_url: none (runs on Krish's own machines)
@@ -18,10 +18,11 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 The engine that builds Krish's voice and likeness training library from his own recordings and photos, on his own machine, exports it in each platform's format and judges the clones that come back. See `README.md`; the reasoning is in `docs/STRATEGY.md`.
 
-## Where it is right now (as of 2026-11-14)
+## Where it is right now (as of 2026-11-15)
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`; a proposal waits on Krish), so there is no number yet.
 
+- A weekly branch sweep (`.github/workflows/branch-sweep.yml`, Sunday 03:17 UTC, and by hand) deletes every remote branch whose work is already on main and lists each branch it keeps with why: unmerged work, an open pull request, protected (Ruling, Krish, 2026-11-15). The script is `.github/scripts/branch_sweep.py`, copied unchanged from ai-harness, which holds the canonical copy. (2026-11-15)
 - `config/sources.json` holds a new approved source, `library`, the library folder's own recordings, with Krish's words of 2026-11-14 ("I approve 5.7, add the library source"). Inventory only: nothing uploaded, cloned or spent, no ElevenLabs or HeyGen call. No other source changed. (2026-11-14)
 - closeout notes now fold into NOW.md on the default branch (.github/workflows/closeout-fold.yml runs the harness's own fold, after checking the hook is the ai-harness copy by sha256). (2026-11-14)
 - **Built and merged to main:** sources gate, voice and face measurement with caching, auto identity gallery, acoustic repeat detection, library, inventory, reading script, ElevenLabs export, HeyGen twin pre-flight, evaluation and blind A/B, and the raw audio dump (`scripts/dump-raw-audio.ps1`). 28 tests pass; CI runs them.
@@ -47,7 +48,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-14): on a home computer, run the inventory on `Video`, `voice/uncompressed` and `voice/archive` with `--source library` (`docs/RUNBOOK.md`, "Next: the free local evaluation") and read `inventory.md`. A harvest of these recordings waits for Krish.
+- Next (2026-11-15): on a home computer, run the inventory on `Video`, `voice/uncompressed` and `voice/archive` with `--source library` (`docs/RUNBOOK.md`, "Next: the free local evaluation") and read `inventory.md`. A harvest of these recordings waits for Krish.
 **Next action: the free local evaluation, on a home computer.** It reads face and voice media, so it runs only on Krish's machine; a cloud session never touches those files. The exact commands are in `docs/RUNBOOK.md`, "Next: the free local evaluation":
 
 1. Install or update, then `clone doctor`.
@@ -61,4 +62,4 @@ Spend stays behind Krish's yes, asked for when it happens: the ElevenLabs Profes
 
 Also Krish's: the North Star.
 
-- North Star check (2026-11-14): holds.
+- North Star check (2026-11-15): holds.
