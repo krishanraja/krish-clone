@@ -22,6 +22,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`; a proposal waits on Krish), so there is no number yet.
 
+- the branch sweep takes an approved list (branch@sha) on a hand run and deletes each named branch only at that exact commit, skipping and logging anything else; the weekly run is unchanged. Copied from ai-harness's canonical script and workflow. (2026-11-15)
 - A weekly branch sweep (`.github/workflows/branch-sweep.yml`, Sunday 03:17 UTC, and by hand) deletes every remote branch whose work is already on main and lists each branch it keeps with why: unmerged work, an open pull request, protected (Ruling, Krish, 2026-11-15). The script is `.github/scripts/branch_sweep.py`, copied unchanged from ai-harness, which holds the canonical copy. (2026-11-15)
 - `config/sources.json` holds a new approved source, `library`, the library folder's own recordings, with Krish's words of 2026-11-14 ("I approve 5.7, add the library source"). Inventory only: nothing uploaded, cloned or spent, no ElevenLabs or HeyGen call. No other source changed. (2026-11-14)
 - closeout notes now fold into NOW.md on the default branch (.github/workflows/closeout-fold.yml runs the harness's own fold, after checking the hook is the ai-harness copy by sha256). (2026-11-14)
@@ -48,7 +49,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-15): on a home computer, run the inventory on `Video`, `voice/uncompressed` and `voice/archive` with `--source library` (`docs/RUNBOOK.md`, "Next: the free local evaluation") and read `inventory.md`. A harvest of these recordings waits for Krish.
+- Next (2026-11-15): run the sweep by hand with dry_run false and this repository's approved list, and read its log.
 **Next action: the free local evaluation, on a home computer.** It reads face and voice media, so it runs only on Krish's machine; a cloud session never touches those files. The exact commands are in `docs/RUNBOOK.md`, "Next: the free local evaluation":
 
 1. Install or update, then `clone doctor`.
