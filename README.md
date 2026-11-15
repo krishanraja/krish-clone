@@ -17,8 +17,8 @@ Nothing here uploads or spends a credit. Every upload, clone or generation is a 
 | `clone twincheck VIDEO --gallery PHOTOS` | Pre-flight for a HeyGen Digital Twin take: ready or reshoot, with reasons. |
 | `clone evaluate --real ... --clone ...` | Speaker similarity of a clone against Krish's own spread. |
 | `clone abpack` / `clone abscore` | Blind A/B pack for people who know him, and its score. |
-| `clone abpanel` / `clone abrecord` / `clone abscore --record` | One shuffled page of pairs per listener, their answers recorded back, and the scored record Krish approves. |
-| `clone registry [list\|check\|add\|withdraw]` | The approved synthetic voices and likenesses (`docs/REGISTRY.md`), which content-engine reads live. |
+| `clone abpanel` / `clone abrecord` / `clone abscore --record` | Optional: one shuffled page of pairs per listener, their answers recorded back, and a scored record Krish may approve. His own say-so is enough without it. |
+| `clone registry [list\|check\|add\|withdraw]` | The synthetic voices and likenesses Krish has approved, on his own say-so or a scored record (`docs/REGISTRY.md`), which content-engine reads live. |
 
 ## Install and first run (Windows home computer)
 
@@ -35,8 +35,8 @@ Details: `docs/RUNBOOK.md`.
 
 - `docs/STRATEGY.md`: the gaps, what closed them, and what only Krish can supply.
 - `docs/CAPTURE.md`: the voice session and the twin take, against each platform's current guidance.
-- `docs/EVALUATION.md`: how "indistinguishable" is judged, with the calibration numbers, and what Krish approves, in order.
-- `docs/REGISTRY.md`: the registry of approved clones, its format, and how other repositories read it.
+- `docs/EVALUATION.md`: how "indistinguishable" is measured, with the calibration numbers, and what Krish approves (his own say-so is enough).
+- `docs/REGISTRY.md`: the registry of approved clones (three, approved 2026-11-15), its format, and how other repositories read it.
 - `docs/ARCHITECTURE.md`: stages, rerun behaviour and the decisions behind them.
 - `NOW.md`: where it stands.
 

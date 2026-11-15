@@ -296,10 +296,24 @@ def _registry(args) -> int:
 
     path = Path(args.file)
     if args.action == "add":
-        if not (args.record and args.words and args.on):
-            raise registry.RegistryError("add needs --record, --words (Krish's exact words) and --on")
-        entry = registry.add(path, Path(args.record), args.words, args.on)
-        print(f"added {entry.name} ({entry.kind}, {entry.platform}), scored pack {entry.scored_pack_sha256}")
+        own = {"NAME": args.name, "--kind": args.kind, "--platform": args.platform,
+               "--platform-name": args.platform_name, "--platform-ref": args.platform_ref}
+        if not (args.words and args.on):
+            raise registry.RegistryError("add needs --words (Krish's exact words) and --on")
+        if args.record:
+            given = [flag for flag, value in own.items() if value]
+            if given:
+                raise registry.RegistryError(f"--record takes the clone from the record, not {', '.join(given)}")
+            entry = registry.add_record(path, Path(args.record), args.words, args.on)
+        else:
+            missing = [flag for flag, value in own.items() if not value]
+            if missing:
+                raise registry.RegistryError(f"add on his own say-so needs {', '.join(missing)} (or --record)")
+            entry = registry.add_own_say_so(path, name=args.name, kind=args.kind, platform=args.platform,
+                                            platform_name=args.platform_name, platform_ref=args.platform_ref,
+                                            words=args.words, on=args.on)
+        print(f"added {entry.name} ({entry.kind}, {entry.platform}, {entry.basis}), "
+              f"approved sha256 {entry.approved_sha256}")
         return 0
     if args.action == "withdraw":
         if not (args.name and args.words and args.on):
@@ -315,7 +329,7 @@ def _registry(args) -> int:
         print("no synthetic voice or likeness is approved")
     for a in approvals:
         state = "active" if a.active else f"withdrawn {a.withdrawn['on']}"
-        print(f"{a.name:24}{a.kind:10}{a.platform:12}{a.approved_on}  {state}  {a.scored_pack_sha256}")
+        print(f"{a.name:24}{a.kind:10}{a.platform:12}{a.basis:15}{a.approved_on}  {state}  {a.approved_sha256}")
     return 0
 
 
@@ -445,9 +459,14 @@ def parser() -> argparse.ArgumentParser:
     rec.add_argument("--sheet", required=True, help="their filled sheet.csv")
     reg = sub.add_parser("registry", help="the approved synthetic voices and likenesses (config/synthetic-approvals.json)")
     reg.add_argument("action", nargs="?", choices=["list", "check", "add", "withdraw"], default="list")
-    reg.add_argument("name", nargs="?", help="withdraw: the clone's name")
+    reg.add_argument("name", nargs="?", help="withdraw, or add on his own say-so: the clone's registry name")
     reg.add_argument("--file", default=None, help="the registry file (default: config/synthetic-approvals.json)")
-    reg.add_argument("--record", help="add: the scored record Krish approved")
+    reg.add_argument("--record", help="add: the scored listening-panel record Krish approved (the optional route)")
+    reg.add_argument("--kind", choices=["voice", "likeness"], help="add on his own say-so")
+    reg.add_argument("--platform", choices=["elevenlabs", "heygen"], help="add on his own say-so")
+    reg.add_argument("--platform-name", help="add on his own say-so: the platform's own name for the clone")
+    reg.add_argument("--platform-ref",
+                     help="add on his own say-so: the platform's id for the clone (a reference, not a secret)")
     reg.add_argument("--words", help="Krish's exact words")
     reg.add_argument("--on", help="the date he said them, YYYY-MM-DD")
     return top
