@@ -34,6 +34,17 @@
       "approved_sha256": "49b63e7540867514c4940b9ef516de0a2540ca4bd84528e84b88be0b554e4fd1",
       "approved_words": "eleven labs correct voice is FOupAntbAMhJ9n9Q4dfC,HeyGen avatar 'Krish Raja' + 'Krish Voice' (Recommended),ElevenLabs voice 'Krish'",
       "approved_on": "2026-11-15"
+    },
+    {
+      "name": "krish-voice-elevenlabs-v2",
+      "kind": "voice",
+      "platform": "elevenlabs",
+      "basis": "own_say_so",
+      "platform_name": "Krish v2",
+      "platform_ref": "EWMCMyM8o9ZcYCijk7nx",
+      "approved_sha256": "e467fc8e2b0bd62da76615fb8fe1df0b0e1bd19aceb15d0ca42e685790dbfb09",
+      "approved_words": "yes, 15% is right, go ahead - ensure the krish-clone repo and the other two sessions know that this is the best choice thus far in terms of voice ID and your usage of it",
+      "approved_on": "2026-11-17"
     }
   ]
 }
