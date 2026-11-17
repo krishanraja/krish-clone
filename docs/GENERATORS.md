@@ -30,6 +30,56 @@ Tags change mood, not accent, so they did not soften his T's. The surgical route
 4. Speed the chosen take up 15% after rendering, keeping pitch: `ffmpeg -i take.mp3 -filter:a atempo=1.15 out.mp3`. The `eleven_v3` settings the connector exposes have no speed control, and speeding the finished take keeps the read he picked. On 17 Nov this took the take from 12.2 s to 10.6 s.
 5. Each finished piece still comes to him before it goes out.
 
+**Warning (17 Nov 2026):** this recipe held for one ten-second opening only. On a whole 90-second script it failed every time, and his accent drifted. Read the failure log below before relying on it for anything longer.
+
+### Failure log: a whole 90-second script would not hold his voice (Tue 17 Nov 2026)
+
+Krish asked for this log "in full excruciating detail" so the voice can be repaired surgically later. The approved recipe above held for one ten-second opening. Every attempt to voice the whole 90-second script after it failed, and on this piece he gave up on the synthetic voice: "For this one, I'll just record manually."
+
+Everything below happened in one content-engine session (session_01JRhKytFcFVtUWn8teqtkUB) on the Tuesday off-day voiceover short "Which of your habits will cost you your job once AI is at work?" (content-engine piece `701a2c55-7400-4dc8-99cb-d6001147ae16`). The script is `docs/plans/2026-11-16-week/tue-habits-vo/script.md` in content-engine: about 240 words, seven paragraphs. Times are UTC. All generations ran through the ElevenLabs connector (creative tools), in flows `VIWrolAx0vnRiw4MlYrt` (rounds 1 to 4b) and `lyaAZ5OQj8bp08tbDKPJ` (rounds 5 and 6 sit in the same flow as his approved opening). Only the opening was ever judged good.
+
+#### Round by round
+
+| # | Time | Voice | Model, stability | Text | Takes (generation id, length) | Credits | Result |
+|---|---|---|---|---|---|---|---|
+| 1 | 10:04 | Five voices: Krish Remix `FOupAntbAMhJ9n9Q4dfC`, the unapproved clone "Krish" `7ApmIXLoWa0cKUtJqfHc`, stock Christopher Atkins `WrH8mCWis9c3KnjuevXI`, stock Alec Wilcock `H8DglpTKljBPHb5j9pP8`, stock Katie Crystal `E8FfddrREO3vtyNsTKnh` | `eleven_v4`, default | First two paragraphs of an earlier draft, no tags | One take each, about 16 to 17 s | 5 x 230 | Superseded before he judged them: he asked for a younger, more casual script read in Krish Remix |
+| 2 | 10:09 | Krish Remix | `eleven_v4`, default | Whole script v3 (233 words), no tags | `tnYvpfQ8jI9mV3DDVfFq` 89.0 s; `YWqgXvGXWMTIqNQNSviY` 87.5 s | 2 x 1,256 | Failed. Krish: "Why does this not sound like that Krish Remix voice when I play it in ElevenLabs?" |
+| 3 | 10:13 | Krish Remix | `eleven_v3` and `eleven_multilingual_v2`, default | Opening two sentences only | v3 `mTOmSZGaZXn7fBQzyZUS` 11.4 s; multilingual_v2 `aFiISQNAo8SCHcDFLWF1` 10.3 s | 2 x 180 | Test. Krish: "v3 sounds right" |
+| 4 | 10:16 | Krish Remix | `eleven_v3`, default (Natural, 0.5) | Whole script, no tags | `opbaRFlEGj3TeeAZvZPu` 88.4 s; `HNc1PmtzXBH0l1Y1usyG` 90.7 s | 2 x 1,256 | Failed. Krish: "I don't enunciate my T's as much as this, and I am a bit more animated". This sent the work to the voice-design rounds that produced Krish v2 (above) |
+| 4b | 10:45 | Krish Remix | `eleven_v3`, default | Whole script v4 with tags (listed below) | `8JRAxOVTj1YSbklpAlY3`; `zMigVLid5qbHwNhkq4Co` | 2 x 1,462 | Wasted, never judged. Started on an interim relay that named Krish Remix as the voice; Krish v2 replaced it two minutes later |
+| 5 | 10:50 | Krish v2 `EWMCMyM8o9ZcYCijk7nx` | `eleven_v3`, default (Natural, 0.5) | Whole script v4 in one generation, with his four approved tags plus three he never approved: `[sarcastic]`, `[curious]`, `[surprised]` | `mLZSfpiRsbAeNNZ8dKST` 103.3 s; `Iytwgdc6X4Lr8tbr2zTw` 99.3 s (raw, not sped up) | 2 x 1,462 | Failed. Krish: "The voice has changed again from what I approved in the other session." |
+| 6 | 10:55 | Krish v2 | `eleven_v3`, default (Natural, 0.5) | Six paragraphs, one generation each, only his four approved tags. The approved opening take `zqb21EXdvGqDbB6XQ8jo` stood as paragraph 1 | P2 `3XrDkRsEG0MQ8gMiDr9i` 11.0 s / `nNE8Gh7u93mKcawFnFUy` 11.1 s; P3 `91P6hirrfoQxIkdsXP8J` 12.2 s / `xpqRXieVkcRBeTtY7SVA` 13.0 s; P4 `uBVZoakXq4NK6NjHbfTZ` 18.8 s / `8G0ilAj0qxzCyFy1d0qH` 18.6 s; P5 `iFqFudXXmD3jgBU14Z8V` 9.0 s / `LtZuoDMil7LKR6wNFgVI` 9.2 s; P6 `rJ45Jbgcv2gYUPq6Tyjh` 19.5 s / `27FfK3vbNp2OBgFcLfxF` 21.0 s; P7 `Y4iihJcgejUIBqBUoH7b` 13.6 s / `bTARFbolFornO21ympBY` 13.7 s | 2,522 in all | Failed badly. Krish's verdict: the accent had drifted northern and posh, away from his own voice |
+| 7 | 10:58 | Krish v2 | `eleven_v3`, **Robust (stability 1)**, set as `voice_settings.stability` on tts node `QGx0ZwRzpbJI2y2Fwper` | Paragraph 3 (the car) only, his tags | `9ACJgWbh1vzg9M5bhB0q` 11.2 s; `4u2mPcJMpsIWmBXClYxR` 11.5 s | 2 x 192 | Failed. Krish: "no". He then chose to record the piece himself |
+
+**Tags in rounds 4b and 5.** The opening used `[excited]`, `[casual]`, `[playful]` and `[conversational]` exactly as approved. After it: `[conversational]` then `[sarcastic]` on "They just shrug and say, well, AI isn't very good, is it?"; `[curious]` on "And bosses already get this"; `[surprised]` on "only 29% even ranked judgment"; `[playful]` on "Because they are"; `[excited]` on "Now, three habits"; `[casual]` on the habits and on the close.
+
+**Tags in round 6**, only from his approved four: `[conversational]` and `[casual]` on P2 and P3; `[conversational]` then `[playful]` on P4 and P5; `[excited]` then `[casual]` on P6; `[conversational]`, `[playful]` and `[casual]` on P7.
+
+**Spend.** About 16,000 credits on this piece's voice after the approved opening, roughly $3.50 at the connector's quoted prices, none of it usable. The usage read (`account_get_usage`) was refused all session ("This connector requires additional permissions"), so the balance was never checked before spending.
+
+#### What is established
+
+- **The voice id was never the fault.** Every failed take's metadata names the intended voice: Krish Remix in rounds 2 to 4b, Krish v2 in rounds 5 to 7.
+- **`eleven_v4` does not sound like Krish Remix.** Round 2, then round 3 against v3 and multilingual_v2, by his ear.
+- **One approved take does not predict the next.** One approved ten-second take of Krish v2 on `eleven_v3` at Natural (`zqb21EXdvGqDbB6XQ8jo`, then sped up 15%) did not carry over. Twelve further short takes on the same voice, model, stability and tag set (round 6) drifted to an accent he does not have.
+- **Robust stability did not fix it** on the one paragraph tried (round 7).
+- **Shorter generations did not fix it either.** Splitting the script into paragraphs of 9 to 21 s (round 6) failed just as the single 100-second generation did (round 5).
+
+#### Suspected, not proven (no test isolated any of these)
+
+1. **The designed voice has no fixed accent.** Krish v2 is a Voice Remix of Krish Remix, which is itself a designed voice ("more of a posh london accent with an aussie twang"). Neither was trained on his recordings directly. So each `eleven_v3` generation may re-interpret the accent from a voice that came from a description, and the approved opening may have been one good draw rather than a stable property. Round 6 is the strongest evidence: same settings, different text, different accent.
+2. **The text pulls the accent.** The opening is short, casual and British-coded ("who gets the boot? Probably you"). Lines with numbers, "HR chiefs", "judgment" and "resignation letter" may pull v3 toward a formal, posher read. Untested: the same paragraph with and without the formal words.
+3. **The tags pull the accent.** `[excited]` and `[playful]` raise energy, and v3 may express that as a different accent on a designed voice. Round 6 used only his approved tags and still drifted, so tags alone do not explain it.
+4. **The 15% speed-up was never tested on a whole take.** Raw length was not the cause on its own (round 6), but nobody has heard a 90-second Krish v2 take sped up 15%, because none was ever good enough to speed up.
+
+#### What a later surgical fix should try, in order
+
+1. **Train a voice on his own recordings instead of describing one.** This is the Professional Voice Clone in `docs/STRATEGY.md`, from clean, animated recordings. Test it on this exact script, all seven paragraphs and not just the opening, before he hears it.
+2. **Speech-to-speech from his own read.** He records the script himself, as he is doing for this piece, and ElevenLabs Voice Changer (`eleven_multilingual_sts_v2`, in the creative flow's model list) maps it onto the approved voice, keeping his timing and accent. Untested on this account.
+3. **If a designed voice is kept, measure before he listens.** Test accent stability across this fixed seven-paragraph script, four takes per paragraph, with `clone evaluate` scoring each take against his real voice (`docs/EVALUATION.md`). Only takes that pass go to him.
+4. **Never approve a voice on its opening alone.** The approval test for a narration voice must be a full script, numbers and formal words included.
+5. **Fix the usage read first,** and price a full-script run before it starts.
+
 Still open: the Professional Voice Clone from clean, animated recordings of him (`docs/STRATEGY.md`) remains the longer-run route.
 
 ## The bar
