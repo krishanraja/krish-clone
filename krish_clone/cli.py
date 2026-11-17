@@ -251,6 +251,25 @@ def _likeness(args) -> int:
     return 0 if result["verdict"] == "pass" else 1
 
 
+def _faceprofile(args) -> int:
+    from . import face, faceprofile
+
+    out = Path(args.out).resolve()
+    repo = Path(__file__).resolve().parents[1]
+    if out == repo or repo in out.parents:
+        print("faceprofile: --out must be outside this repository; his face data never enters git", file=sys.stderr)
+        return 2
+    detector = face.Detector("onnx", RUNTIME)
+    result = faceprofile.profile(_files([Path(p) for p in args.photos]), detector, floor=args.floor)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "face-profile.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
+    (out / "face-profile.md").write_text(faceprofile.markdown(result), encoding="utf-8")
+    agg = result["aggregate"]
+    print(f"faceprofile: {agg['photos']} photos of him ({agg['frontal']} near-frontal), {len(result['skipped'])} skipped; "
+          f"wrote {out / 'face-profile.json'} and face-profile.md")
+    return 0
+
+
 def _abpack(args) -> int:
     from . import evaluate
 
@@ -449,6 +468,10 @@ def parser() -> argparse.ArgumentParser:
     li.add_argument("--real", nargs="+", required=True, help="real photos or videos of Krish (files or folders, at least three)")
     li.add_argument("--clone", nargs="+", required=True, help="generated stills or videos to judge (files or folders)")
     li.add_argument("--fps", type=float, default=2.0, help="frames sampled per second of video")
+    fp = sub.add_parser("faceprofile", help="measure and aggregate his face across his own photos (written outside the repository)")
+    fp.add_argument("photos", nargs="+", help="photos of Krish (files or folders)")
+    fp.add_argument("--out", required=True, help="a folder outside this repository, on his machine or Drive library")
+    fp.add_argument("--floor", type=float, default=0.55, help="identity floor below which a face is not counted as him")
     ab = sub.add_parser("abpack", help="build a blind A/B listening pack and its answer key")
     ab.add_argument("--real", nargs="+", required=True)
     ab.add_argument("--clone", nargs="+", required=True)
@@ -493,7 +516,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "registry" and args.file is None:
         args.file = str(registry.DEFAULT)
     handlers = {"export": _export, "twincheck": _twin, "doctor": _doctor, "sources": _sources, "script": _script,
-                "evaluate": _evaluate, "likeness": _likeness, "abpack": _abpack, "abscore": _abscore, "abpanel": _abpanel,
+                "evaluate": _evaluate, "likeness": _likeness, "faceprofile": _faceprofile, "abpack": _abpack, "abscore": _abscore, "abpanel": _abpanel,
                 "abrecord": _abrecord, "registry": _registry}
     try:
         if args.command in handlers:

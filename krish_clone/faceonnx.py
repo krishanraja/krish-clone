@@ -182,8 +182,11 @@ class OnnxFaces:
         vector = self.rec.run(None, {self.rec_in: blob})[0].reshape(-1)
         return vector / np.linalg.norm(vector)
 
-    def pose(self, image, box) -> list[float]:
-        """[pitch, yaw, roll] in degrees from 68 3D landmarks, exactly as insightface reports face.pose."""
+    def landmarks68(self, image, box):
+        """The 68 landmarks (iBUG layout, x and y in image pixels, z in pixels) that pose() is computed from."""
+        return self._points(image, box)
+
+    def _points(self, image, box):
         import cv2
         import math
         import numpy as np
@@ -203,6 +206,15 @@ class OnnxFaces:
         points = np.zeros_like(pred)
         points[:, 0:2] = pred[:, 0:2] @ inverse[:, :2].T + inverse[:, 2]
         points[:, 2] = pred[:, 2] * math.sqrt(inverse[0, 0] ** 2 + inverse[0, 1] ** 2)
+        return points
+
+    def pose(self, image, box) -> list[float]:
+        """[pitch, yaw, roll] in degrees from 68 3D landmarks, exactly as insightface reports face.pose."""
+        import math
+        import numpy as np
+
+        points = self._points(image, box)
+
         homogeneous = np.hstack((self.mean_shape, np.ones((68, 1), dtype=np.float32)))
         affine = np.linalg.lstsq(homogeneous, points, rcond=None)[0].T
         r1 = affine[0, :3] / np.linalg.norm(affine[0, :3])
