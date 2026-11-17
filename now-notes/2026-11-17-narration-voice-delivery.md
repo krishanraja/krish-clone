@@ -1,3 +1,0 @@
-Status: Krish approved ElevenLabs "Krish v2" (EWMCMyM8o9ZcYCijk7nx), a Voice Remix of Krish Remix with softer T's, as his best narration voice so far: on eleven_v3 with audio tags, the chosen take sped up 15% (docs/GENERATORS.md). It is in config/synthetic-approvals.json as krish-voice-elevenlabs-v2 with his exact words; Krish Remix stays approved as the backup. Voices designed from a text description were rejected as different people. Spend on test takes: 1,356 ElevenLabs credits, plus one voice-design round and a 1-second sandbox run whose costs were not reported.
-Next: content-engine's voiceover sessions use Krish v2 with the recipe in docs/GENERATORS.md, and Krish judges the first finished voiceover made with it.
-North Star check (2026-11-17): holds.
