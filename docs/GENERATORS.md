@@ -7,9 +7,18 @@ This repository judges clones; it never generates. Generation runs through the c
 | Job | Route | Status |
 |---|---|---|
 | Krish presenting to camera | HeyGen avatar group "Krish Raja" (15 looks) with its voice "Krish Voice" | Approved on his own say-so, 2026-11-15 (`config/synthetic-approvals.json`) |
-| His voice for narration | ElevenLabs "Krish Remix" | Approved, 2026-11-15 |
+| His voice for narration | ElevenLabs "Krish Remix" (`FOupAntbAMhJ9n9Q4dfC`) on model `eleven_v3`, delivery set with v3 audio tags (below) | Approved, 2026-11-15; delivery approved 2026-11-17 |
 | Range: stills, storyboards, ad variants, several takes of one approved still | Higgsfield, connected | Placed by Krish (Heartside first, makeyourmindup and Full Time share); about 2.75 credits a GPT Image still and 210 a Seedance 2.5 clip (Control Center, observed 2026-10-22). Its placement rules out a moving mouth. |
 | Controlled motion from one approved still | Runway, connected | Placed as Higgsfield |
+
+## His narration voice: how it is driven (2026-11-17)
+
+Krish's notes on Krish Remix takes: "I don't enunciate my T's as much as this, and I am a bit more animated". Two routes were tried on the Tue 17 Nov voiceover lines.
+
+- **Rejected: a voice designed from a text description** (ElevenLabs voice design, `eleven_ttv_v3`, his accent and both notes written out). All three previews were new people: "Now they just sound like completely different humans entirely. Remember that what we're working off of was trained on all of my voice inputs." A description never hears his recordings, so this route cannot keep him. None was saved.
+- **Approved: Krish Remix itself on `eleven_v3`, default stability (Natural, 0.5), with audio tags** that set the delivery and leave his words unchanged: `[excited] You can't sack an AI. [casual] So when it screws up, who gets the boot? [playful] Probably you. [conversational] And honestly, that's fair, because loads of people are blaming the AI for their own mistakes right now.` Of two takes he said "take 2 is good" (ElevenLabs generation `NTGInE9H8lsyZUNsU7Z0`, 226 credits a take). `eleven_v4` did not sound like him on this voice.
+
+Still open: tags change mood, not accent, so his softer T's are not fixed by them. The surgical route keeps his identity and changes one attribute at a time: ElevenLabs Voice Remix on Krish Remix (a new voice id, judged against take 2 on the same lines, and added to `config/synthetic-approvals.json` only on his say-so), and in the longer run the Professional Voice Clone from clean, animated recordings of him (`docs/STRATEGY.md`).
 
 ## The bar
 

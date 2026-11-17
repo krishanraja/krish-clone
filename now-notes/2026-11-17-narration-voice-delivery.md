@@ -1,0 +1,3 @@
+Status: Krish Remix (FOupAntbAMhJ9n9Q4dfC) stays his narration voice; on eleven_v3 with v3 audio tags for delivery he approved a take ("take 2 is good"), and voices designed from a text description were rejected as different people (docs/GENERATORS.md). No registry change, nothing trained or uploaded; 452 ElevenLabs credits were spent on the two approved-route takes, plus one voice-design round whose cost was not reported.
+Next: Krish tries ElevenLabs Voice Remix on Krish Remix for softer T's, and the new voice is judged against take 2 on the same lines before any registry entry.
+North Star check (2026-11-17): holds.
