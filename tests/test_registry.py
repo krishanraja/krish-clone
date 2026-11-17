@@ -1,4 +1,4 @@
-"""The registry of approved synthetic voices and likenesses: its format, its refusals, the three approvals it holds,
+"""The registry of approved synthetic voices and likenesses: its format, its refusals, the approvals it holds,
 and adding Krish's approval on his own say-so or of a scored record. Invented names, words, ids and hashes, except
 where a test reads the committed registry back."""
 
@@ -22,7 +22,7 @@ OWN = {"name": "krish-voice-test", "kind": "voice", "platform": "elevenlabs", "b
        "platform_name": "Test Voice", "platform_ref": TEST_REF,
        "approved_sha256": registry.subject_sha256("voice", "elevenlabs", "Test Voice", TEST_REF),
        "approved_words": "test words, not Krish's", "approved_on": "2026-11-20"}
-# The three approvals of 2026-11-15, with each sha256 computed apart from this code, as docs/REGISTRY.md shows:
+# The approvals, with each sha256 computed apart from this code, as docs/REGISTRY.md shows:
 #   printf '%s' '<the canonical description>' | sha256sum
 APPROVED = {
     "krish-voice-elevenlabs": ("voice", "elevenlabs", "Krish Remix", "FOupAntbAMhJ9n9Q4dfC",
@@ -31,7 +31,12 @@ APPROVED = {
                             "f63dd89366687f06efcc9ace8fe9b5d3191e7323177b833883cd86601da20e75"),
     "krish-voice-heygen": ("voice", "heygen", "Krish Voice", "76d9dedcfa2d4f628beb43090e74e473",
                            "49b63e7540867514c4940b9ef516de0a2540ca4bd84528e84b88be0b554e4fd1"),
+    "krish-voice-elevenlabs-v2": ("voice", "elevenlabs", "Krish v2", "EWMCMyM8o9ZcYCijk7nx",
+                                  "e467fc8e2b0bd62da76615fb8fe1df0b0e1bd19aceb15d0ca42e685790dbfb09"),
 }
+# His approvals by date: the three of 15 November came in one answer; Krish v2 on 17 November.
+APPROVED_ON = {"krish-voice-elevenlabs": "2026-11-15", "krish-avatar-heygen": "2026-11-15",
+               "krish-voice-heygen": "2026-11-15", "krish-voice-elevenlabs-v2": "2026-11-17"}
 
 
 def text(*entries) -> str:
@@ -49,19 +54,20 @@ def without(base: dict, *keys) -> dict:
 
 
 class RegistryFormatTest(unittest.TestCase):
-    def test_the_committed_registry_holds_his_three_approvals_of_15_november(self):
+    def test_the_committed_registry_holds_his_approvals(self):
         approvals = registry.load()
         self.assertEqual(json.loads(registry.DEFAULT.read_text())["format"], registry.FORMAT)
         self.assertEqual([a.name for a in approvals], list(APPROVED))
-        words = {a.approved_words for a in approvals}
-        self.assertEqual(len(words), 1)  # one answer of his approved all three
+        words = {a.approved_words for a in approvals if a.approved_on == "2026-11-15"}
+        self.assertEqual(len(words), 1)  # one answer of his approved all three of 15 November
         self.assertIn("FOupAntbAMhJ9n9Q4dfC", words.pop())
         for entry in approvals:
             kind, platform, platform_name, platform_ref, sha = APPROVED[entry.name]
             with self.subTest(entry.name):
                 self.assertEqual((entry.kind, entry.platform, entry.platform_name, entry.platform_ref),
                                  (kind, platform, platform_name, platform_ref))
-                self.assertEqual((entry.basis, entry.approved_on, entry.score), ("own_say_so", "2026-11-15", None))
+                self.assertEqual((entry.basis, entry.approved_on, entry.score),
+                                 ("own_say_so", APPROVED_ON[entry.name], None))
                 self.assertEqual(entry.approved_sha256, sha)
                 described = registry.subject(kind, platform, platform_name, platform_ref)
                 self.assertEqual(registry.sha256_bytes(described), sha)

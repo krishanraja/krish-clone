@@ -7,9 +7,30 @@ This repository judges clones; it never generates. Generation runs through the c
 | Job | Route | Status |
 |---|---|---|
 | Krish presenting to camera | HeyGen avatar group "Krish Raja" (15 looks) with its voice "Krish Voice" | Approved on his own say-so, 2026-11-15 (`config/synthetic-approvals.json`) |
-| His voice for narration | ElevenLabs "Krish Remix" | Approved, 2026-11-15 |
+| His voice for narration | ElevenLabs "Krish v2" (`EWMCMyM8o9ZcYCijk7nx`) on model `eleven_v3`, delivery set with v3 audio tags, sped up 15% after rendering (below) | Approved 2026-11-17; his best so far. "Krish Remix" (`FOupAntbAMhJ9n9Q4dfC`, approved 2026-11-15) stays approved as the backup |
 | Range: stills, storyboards, ad variants, several takes of one approved still | Higgsfield, connected | Placed by Krish (Heartside first, makeyourmindup and Full Time share); about 2.75 credits a GPT Image still and 210 a Seedance 2.5 clip (Control Center, observed 2026-10-22). Its placement rules out a moving mouth. |
 | Controlled motion from one approved still | Runway, connected | Placed as Higgsfield |
+
+## His narration voice: Krish v2, and how it is driven (2026-11-17)
+
+Krish's notes on Krish Remix takes: "I don't enunciate my T's as much as this, and I am a bit more animated". Two routes were tried on the Tue 17 Nov voiceover lines.
+
+- **Rejected: a voice designed from a text description** (ElevenLabs voice design, `eleven_ttv_v3`, his accent and both notes written out). All three previews were new people: "Now they just sound like completely different humans entirely. Remember that what we're working off of was trained on all of my voice inputs." A description never hears his recordings, so this route cannot keep him. None was saved.
+- **Approved: Krish Remix itself on `eleven_v3`, default stability (Natural, 0.5), with audio tags** that set the delivery and leave his words unchanged: `[excited] You can't sack an AI. [casual] So when it screws up, who gets the boot? [playful] Probably you. [conversational] And honestly, that's fair, because loads of people are blaming the AI for their own mistakes right now.` Of two takes he said "take 2 is good" (ElevenLabs generation `NTGInE9H8lsyZUNsU7Z0`, 226 credits a take). `eleven_v4` did not sound like him on this voice.
+
+Tags change mood, not accent, so they did not soften his T's. The surgical route keeps his identity and changes one attribute at a time: ElevenLabs Voice Remix on Krish Remix.
+
+- **Approved, his best so far: "Krish v2" (`EWMCMyM8o9ZcYCijk7nx`, registry `krish-voice-elevenlabs-v2`).** Krish made two remixes of Krish Remix in the ElevenLabs app with the prompt "Same man, same accent and tone. Softer, glottal T's like relaxed London speech; keep everything else identical." ("Krish v1", `zBnYxhtZxkcWwYsi497n`, and "Krish v2"). Each read the same tagged lines on `eleven_v3`, two takes each. He picked "v2, take A - but needs to speak 15% faster" (generation `zqb21EXdvGqDbB6XQ8jo`), then of the take sped up 15%: "yes, 15% is right, go ahead - ensure the krish-clone repo and the other two sessions know that this is the best choice thus far in terms of voice ID and your usage of it".
+
+### How to use it
+
+1. Voice `EWMCMyM8o9ZcYCijk7nx` ("Krish v2"), model `eleven_v3`, default stability (Natural, 0.5). Not `eleven_v4`.
+2. Write his approved words unchanged, with v3 audio tags before the beats that set the delivery: `[excited]` on the hook, `[casual]`, `[playful]` on the turn, `[conversational]` on the explanation.
+3. Render two takes and keep the better one; v3 varies from take to take.
+4. Speed the chosen take up 15% after rendering, keeping pitch: `ffmpeg -i take.mp3 -filter:a atempo=1.15 out.mp3`. The `eleven_v3` settings the connector exposes have no speed control, and speeding the finished take keeps the read he picked. On 17 Nov this took the take from 12.2 s to 10.6 s.
+5. Each finished piece still comes to him before it goes out.
+
+Still open: the Professional Voice Clone from clean, animated recordings of him (`docs/STRATEGY.md`) remains the longer-run route.
 
 ## The bar
 

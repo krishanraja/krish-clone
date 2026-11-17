@@ -11,6 +11,9 @@ Krish approves a synthetic voice or likeness of himself on his own say-so; no li
 | `krish-voice-elevenlabs` | voice | elevenlabs | Krish Remix | `FOupAntbAMhJ9n9Q4dfC` | 2026-11-15, own say-so |
 | `krish-avatar-heygen` | likeness | heygen | Krish Raja (the avatar group, 15 looks) | `fa0069900c1049acbadc045c7866cdc5` | 2026-11-15, own say-so |
 | `krish-voice-heygen` | voice | heygen | Krish Voice (the avatar's default voice) | `76d9dedcfa2d4f628beb43090e74e473` | 2026-11-15, own say-so |
+| `krish-voice-elevenlabs-v2` | voice | elevenlabs | Krish v2 | `EWMCMyM8o9ZcYCijk7nx` | 2026-11-17, own say-so; his best narration voice so far |
+
+**His best narration voice so far is `krish-voice-elevenlabs-v2`, "Krish v2"** (Krish, 2026-11-17: "this is the best choice thus far in terms of voice ID and your usage of it"). It is an ElevenLabs Voice Remix of Krish Remix for softer, glottal T's, used on `eleven_v3` with audio tags and sped up 15% after rendering (`docs/GENERATORS.md`). Krish Remix stays approved and is not withdrawn; his workspace now names it "Backup - Krish Remix", and the entry keeps the name he approved.
 
 The older cloned voice named "Krish" in his ElevenLabs workspace is not approved (it scores 0.41 against his real voice, `docs/EVALUATION.md`); the approved ElevenLabs voice is the one with id `FOupAntbAMhJ9n9Q4dfC`, named "Krish Remix" there (Ruling, Krish, 2026-11-15).
 
