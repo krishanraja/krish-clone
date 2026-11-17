@@ -82,6 +82,42 @@ Everything below happened in one content-engine session (session_01JRhKytFcFVtUW
 
 Still open: the Professional Voice Clone from clean, animated recordings of him (`docs/STRATEGY.md`) remains the longer-run route.
 
+## His likeness in stills: closing the last 10% (2026-11-17)
+
+Krish, on six generated headshots for face-led covers: "they all look 90% there but need surgical 10%. can you involve the krish-clone repo to encode how we close the final 10% gap?" This section is that encoding, built the way the voice work above was: measure first, change one thing at a time, and record every round so a later session repairs it surgically.
+
+### What was made (content-engine session_01JRhKyq6QmG4sLbWkSRVepS)
+
+- **References.** Only the files at the top of his Drive folder "Photos" (`1PQDSg4_kD6zwVerqvxaiQE5Ocjnsd6xB`), never its subfolders (Krish: "only use my reference images from ... folder, NOT the subfolders"). Six were sent to Higgsfield as references, at his request in that session: the denim-jacket cutout, the bespectacled cutout, the natural cutout, the pale blue Oxford headshot, the restored portrait with natural shoulders and the natural headshot on off-white.
+- **Generator.** Higgsfield `gpt_image_2_6`, 3:4, three to four references per still, 0.25 credits a still by the connector's own preflight (`get_cost`) on 2026-11-17. Six looks: navy knit on charcoal; glasses, blazer and white shirt on off-white; skeptical brow, black tee on grey; glasses, overshirt on dark green; big smile, blue Oxford on the series yellow; glasses, navy jacket on near-black. Higgsfield job ids: `673105f2-8967-4365-a416-db1cef668422`, `2c0d9216-a4d5-48ba-9761-7788f58a2530`, `f58249ff-dd7c-4df7-9f55-8e647301d0d1`, `671c8e62-aa8a-4640-8d95-616aae81d938`, `d9a0c5da-3481-434d-b90c-bfb2a68a0f92`, `e9070f3b-eb63-4bca-b227-063c5084f058`.
+
+### What the measurement says
+
+`clone likeness --real <the nine top-level photos> --clone <the six stills>`, run in that cloud session at Krish's request rather than on his machine:
+
+| | Identity (ArcFace, cosine to the real photos) |
+|---|---|
+| Real Krish against real Krish | median 0.763, 5th percentile 0.698 (the floor) |
+| The six generated stills | 0.784, 0.734, 0.787, 0.787, 0.771, 0.764: all pass |
+| His own screenshot (`Screenshot 2026-05-26 170626.png`) against the rest | 0.675, the weakest real file |
+
+So every still is already him to the identity model, scoring as high as his own photos do against each other. **The last 10% is not identity.** It is what ArcFace cannot see: skin texture and age, hairline and hair texture, beard density and edge, teeth and smile, the shape of the glasses, skin tone under the lighting, and the polished studio finish no real photo of him has. Only his eye can name those, so the loop below starts with his words, not a score.
+
+### The surgical loop
+
+1. **He names the gap, still by still, in his own words.** Ask one question per still: "What is the 10% on this one?", offering these attributes to point at: eyes and glasses; hairline and hair texture; beard density and edge; skin texture and age; teeth and smile; nose; ears; skin tone; build and shoulders; overall polish. His words go into the round log below, verbatim. Never guess the attribute for him.
+2. **Edit, never regenerate.** Feed the still he liked best plus the one real photo that shows the named attribute most clearly, and ask for that attribute only: "Keep this exact image. Change only the <attribute> to match the second reference photo. Do not change anything else." One attribute per pass. A fresh generation re-rolls everything and loses what was already right, which is the image counterpart of the voice failure above (one good draw does not predict the next).
+3. **Measure each edit.** `clone likeness` on the edited still against the same real set. An edit that drops identity below the still it came from is discarded, however it looks.
+4. **Keep the reference set clean.** Drop the screenshot (0.675) from the references; it is the least like the rest of him. Prefer photos with his natural skin and real light over the retouched ones, so the generator copies his texture, not a studio finish.
+5. **Stop at his yes.** A still is approved only in his own words, recorded with `clone registry add` (kind likeness, the still's sha256, his words and the date) before content-engine uses it; each finished cover still comes to him before it goes out.
+6. **If the loop stalls after two rounds on one still**, train a reusable identity instead: Higgsfield Soul ID from 10 to 20 top-level photos (the connector's `show_characters` train), then generate with `soul_2` and that id, and run the same loop. It costs more and needs his approval by name, so it is the second route, not the first.
+
+### Round log
+
+| Round | Date | Stills | What Krish said | Change made | Identity after |
+|---|---|---|---|---|---|
+| 1 | 2026-11-17 | the six above | "they all look 90% there but need surgical 10%" | none yet: step 1 asks him to name each still's 10% | 0.734 to 0.787 |
+
 ## The bar
 
 A new generator joins only when all of these hold:
