@@ -132,9 +132,16 @@ First run (17 Nov 2026, the nine top-level photos, in content-engine's cloud ses
 
 ### Round log
 
+Gate every still on `clone likeness` against all his real photos before showing it to him: on 18 Nov its pass line matched his own verdict on six stills out of six, so a still below it is not worth his look. Measure colour before regenerating anything: a generator's skin-tone bias is fixed free, locally, and only geometry or features need a new generation.
+
+
 | Round | Date | Stills | What Krish said | Change made | Identity after |
 |---|---|---|---|---|---|
 | 1 | 2026-11-17 | the six above | "they all look 90% there but need surgical 10%" | none yet: step 1 asks him to name each still's 10% | 0.734 to 0.787 |
+| 2 | 2026-11-18 | the bank of six (round 1 edits of five, the original glasses still) | none yet; measured against his face profile from all 59 photos | geometry was inside his normal range on every still; the one fault every still shared was skin too red (skin a* 24 to 31 against his 16.5 to 21; forehead worst). A local LAB pull of a* on skin-hued pixels only, no generation and no spend, brought skin into range on five of six and halved the forehead excess | 0.775 to 0.858 against his own centroid (unchanged by the fix) |
+| 3 | 2026-11-18 | the six colour-corrected stills | "1. Image 1 looks good and could pass for me. 2. Image 2: my chin is too small. 3. Image 3 is good and could pass for me. 4. Image 4 is good and could pass for me. 5. Image 5 looks nothing like me. 6. Image 6 is good and could pass for me." | stills 1, 3, 4 and 6 recorded as approved (`krish-still-higgsfield-1`, `-3`, `-4`, `-6`, each pinned by its file's sha256); still 5 dropped; still 2 given one edit, chin longer and stronger, two variants (about 0.5 credits). The chin measures longer on both (chin height 0.66 to 0.70) | `clone likeness` against all 59 real photos (pass line 0.711, the 5th percentile of him against himself) agreed with his verdict on all six: 0.757, 0.773, 0.755, 0.762 pass; still 2 0.678 and still 5 0.637 fail. Chin edits 0.678 and 0.690, still below the line |
+| 4 | 2026-11-18 | a new still 5 (four loft-window variants, three-quarter, waist-up, no glasses), then still 1 | on the loft variants and still 1: "I have broader shoulders than that. Image 1 could also benefit from broader shoulders." | four new variants (about 1 credit), all passing likeness (0.725 to 0.760); then one edit each, broader shoulders only, on loft B, loft D and still 1 (about 0.75 credits). The face profile measures no build, so shoulder width is judged by his eye | shoulder edits 0.737, 0.745 and 0.746, all above the 0.711 line |
+| 5 | 2026-11-18 | loft A, and still 1 at a shoulder width between the original and the broad edit | "I also prefer A in this palette." then, circling loft A as it was and the first in-between still 1: "These two" | broader-shoulder edit of loft A (one of two passed, 0.735; the 0.688 one was not shown); two in-between edits of still 1 (0.733, 0.734); about 1 credit. He kept loft A without the edit and took the first in-between still 1; both recorded (`krish-still-higgsfield-5`, `-1-shoulders`) | 0.725 and 0.733 |
 
 ## The bar
 

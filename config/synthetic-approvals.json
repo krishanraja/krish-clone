@@ -45,6 +45,72 @@
       "approved_sha256": "e467fc8e2b0bd62da76615fb8fe1df0b0e1bd19aceb15d0ca42e685790dbfb09",
       "approved_words": "yes, 15% is right, go ahead - ensure the krish-clone repo and the other two sessions know that this is the best choice thus far in terms of voice ID and your usage of it",
       "approved_on": "2026-11-17"
+    },
+    {
+      "name": "krish-still-higgsfield-1",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 1, colour-corrected (round 2 bank)",
+      "platform_ref": "b1684a272ba1c0151202f5a3799aba9241a09fcfd02ac9843458b4796fdb63c9",
+      "approved_sha256": "dc07a86e38427724f76c3693d10e2a49f6667c17c83fe209dbeb667490718521",
+      "approved_words": "I'll go from left to right and top to bottom.\n1. Image 1 looks good and could pass for me.\n2. Image 2: my chin is too small.\n3. Image 3 is good and could pass for me.\n4. Image 4 is good and could pass for me.\n5. Image 5 looks nothing like me.\n6. Image 6 is good and could pass for me.",
+      "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-3",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 3, colour-corrected (round 2 bank)",
+      "platform_ref": "04ba73f8fb1432188657c9362051231d01d4a1e74828e6d462ecc28dc7aad8ce",
+      "approved_sha256": "d3442f5fbf4ce970aae2ca74c112496b126a71502c865a20f206d5adc2f6bc24",
+      "approved_words": "I'll go from left to right and top to bottom.\n1. Image 1 looks good and could pass for me.\n2. Image 2: my chin is too small.\n3. Image 3 is good and could pass for me.\n4. Image 4 is good and could pass for me.\n5. Image 5 looks nothing like me.\n6. Image 6 is good and could pass for me.",
+      "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-4",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 4, colour-corrected (round 2 bank)",
+      "platform_ref": "f92390dc5ae042d46a61f83bf210f79d5aee1bc28b3331fb0a7269a962346bff",
+      "approved_sha256": "2bd25765c2146b38b99fe02cfe65c4699061f4de31f0f18b5c3877dd7dd733b6",
+      "approved_words": "I'll go from left to right and top to bottom.\n1. Image 1 looks good and could pass for me.\n2. Image 2: my chin is too small.\n3. Image 3 is good and could pass for me.\n4. Image 4 is good and could pass for me.\n5. Image 5 looks nothing like me.\n6. Image 6 is good and could pass for me.",
+      "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-6",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 6, colour-corrected (round 2 bank)",
+      "platform_ref": "c977de98edcf92de9a959061479c274c869f7732bb9344a48366349119295e08",
+      "approved_sha256": "6623481521b6327d89539ae8f493e52a44bfea33d0631b339e543116ce647c51",
+      "approved_words": "I'll go from left to right and top to bottom.\n1. Image 1 looks good and could pass for me.\n2. Image 2: my chin is too small.\n3. Image 3 is good and could pass for me.\n4. Image 4 is good and could pass for me.\n5. Image 5 looks nothing like me.\n6. Image 6 is good and could pass for me.",
+      "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-5",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 5, loft window, three-quarter (round 4, variant A)",
+      "platform_ref": "2a312e8f7469017d1585928d715a198d287a2f9d8f1216cb341dcc83f99eb377",
+      "approved_sha256": "1f68a3794a057c5504f3b5668d96628b7a65db26b813b6e48172663a6f70fc8e",
+      "approved_words": "These two",
+      "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-1-shoulders",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 1 with broader shoulders, in between (round 5)",
+      "platform_ref": "272152829a05fac72b01579a190608f94642116fdb0fdb5d788c3dd65d8fbcaf",
+      "approved_sha256": "d59682d74539206a8a21fc4adea1ea439babeca3bb35d29993181b9d2f3d0861",
+      "approved_words": "These two",
+      "approved_on": "2026-11-18"
     }
   ]
 }

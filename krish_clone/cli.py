@@ -500,7 +500,7 @@ def parser() -> argparse.ArgumentParser:
     reg.add_argument("--file", default=None, help="the registry file (default: config/synthetic-approvals.json)")
     reg.add_argument("--record", help="add: the scored listening-panel record Krish approved (the optional route)")
     reg.add_argument("--kind", choices=["voice", "likeness"], help="add on his own say-so")
-    reg.add_argument("--platform", choices=["elevenlabs", "heygen"], help="add on his own say-so")
+    reg.add_argument("--platform", choices=["elevenlabs", "heygen", "higgsfield"], help="add on his own say-so")
     reg.add_argument("--platform-name", help="add on his own say-so: the platform's own name for the clone")
     reg.add_argument("--platform-ref",
                      help="add on his own say-so: the platform's id for the clone (a reference, not a secret)")
