@@ -1,7 +1,7 @@
 ---
 repo: krishanraja/krish-clone
 product: krish-clone (voice and likeness training library)
-as_of: 2026-11-17
+as_of: 2026-11-18
 head: 507670c
 lifecycle: building
 production_url: none (runs on Krish's own machines)
@@ -18,10 +18,13 @@ steward: https://github.com/krishanraja/ai-harness/blob/main/docs/steward/RUNBOO
 
 The engine that builds Krish's voice and likeness training library from his own recordings and photos, on his own machine, exports it in each platform's format and judges the clones that come back. See `README.md`; the reasoning is in `docs/STRATEGY.md`.
 
-## Where it is right now (as of 2026-11-17)
+## Where it is right now (as of 2026-11-18)
 
 <!-- north-star-state {"week_of":"2026-11-09","week_target":null,"current":null,"current_as_of":null,"current_source":null,"urgency":4,"urgency_reason":"North Star not set; Krish sets it"} --> **North Star number: U4, not measured.** The North Star is not set (`docs/NORTH_STAR.md`; a proposal waits on Krish), so there is no number yet.
 
+- six generated headshots approved and in the registry by file hash (1 with broader shoulders, 3, 4, 5 loft window, 6, plus the original 1); all filed to his brand kit. (2026-11-18)
+- Krish approved four generated headshots, now in the registry by file hash (Higgsfield stills are a new likeness platform); clone likeness against his 59 photos matched his verdict on all six; still 2's chin edit measures longer but stays below the pass line. (2026-11-18)
+- round 2 of the stills loop measured the headshot bank against his face profile from 59 photos; geometry holds, skin redness was the shared fault and a free local colour pull fixes most of it. (2026-11-18)
 - six generated headshots for face-led covers measured with clone likeness; all pass identity (0.734 to 0.787 against a real floor of 0.698), so the surgical loop for the last 10% is written into docs/GENERATORS.md. (2026-11-17)
 - clone faceprofile measures and aggregates his face (landmark geometry, colour, expression, spread) across his own photos and writes only outside the repository; first run on the nine top-level photos counted all nine as him. (2026-11-17)
 - docs/GENERATORS.md now logs, round by round, how the Krish v2 recipe (eleven_v3, tags, +15%) failed on a whole 90-second script on 17 Nov: every generation id, setting, length, cost and Krish's verdict, what is established, what is only suspected, and the fixes to try in order. Krish recorded that piece himself. (2026-11-17)
@@ -56,7 +59,7 @@ The engine that builds Krish's voice and likeness training library from his own 
 
 ## What is next and what is waiting on Krish
 
-- Next (2026-11-17): ask Krish to name the 10% on each still in his own words, then run one single-attribute edit per still and re-measure.
+- Next (2026-11-18): use the approved headshots in the next face-led covers (cover-art, generated variant).
 **Next action: the free local evaluation, on a home computer.** It reads face and voice media, so it runs only on Krish's machine; a cloud session never touches those files. The exact commands are in `docs/RUNBOOK.md`, "Next: the free local evaluation":
 
 1. Install or update, then `clone doctor`.
@@ -70,4 +73,4 @@ Spend stays behind Krish's yes, asked for when it happens: the ElevenLabs Profes
 
 Also Krish's: the North Star.
 
-- North Star check (2026-11-17): holds.
+- North Star check (2026-11-18): holds.
