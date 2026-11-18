@@ -132,9 +132,13 @@ First run (17 Nov 2026, the nine top-level photos, in content-engine's cloud ses
 
 ### Round log
 
+Measure colour before regenerating anything: a generator's skin-tone bias is fixed free, locally, and only geometry or features need a new generation.
+
+
 | Round | Date | Stills | What Krish said | Change made | Identity after |
 |---|---|---|---|---|---|
 | 1 | 2026-11-17 | the six above | "they all look 90% there but need surgical 10%" | none yet: step 1 asks him to name each still's 10% | 0.734 to 0.787 |
+| 2 | 2026-11-18 | the bank of six (round 1 edits of five, the original glasses still) | none yet; measured against his face profile from all 59 photos | geometry was inside his normal range on every still; the one fault every still shared was skin too red (skin a* 24 to 31 against his 16.5 to 21; forehead worst). A local LAB pull of a* on skin-hued pixels only, no generation and no spend, brought skin into range on five of six and halved the forehead excess | 0.775 to 0.858 against his own centroid (unchanged by the fix) |
 
 ## The bar
 
