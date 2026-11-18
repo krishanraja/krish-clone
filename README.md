@@ -17,6 +17,7 @@ Nothing here uploads or spends a credit. Every upload, clone or generation is a 
 | `clone twincheck VIDEO --gallery PHOTOS` | Pre-flight for a HeyGen Digital Twin take: ready or reshoot, with reasons. |
 | `clone evaluate --real ... --clone ...` | Speaker similarity of a clone against Krish's own spread. |
 | `clone likeness --real ... --clone ...` | Face identity of generated stills or video against Krish's own spread: fidelity, drift within a clip, the face staying in shot. Any generator, judged the same way, uploading nothing. |
+| `clone faceprofile PHOTOS --out DIR` | Everything measurable about his face across his own photos: landmark geometry, colour, expression and how each varies. Writes only outside this repository. |
 | `clone abpack` / `clone abscore` | Blind A/B pack for people who know him, and its score. |
 | `clone abpanel` / `clone abrecord` / `clone abscore --record` | Optional: one shuffled page of pairs per listener, their answers recorded back, and a scored record Krish may approve. His own say-so is enough without it. |
 | `clone registry [list\|check\|add\|withdraw]` | The synthetic voices and likenesses Krish has approved, on his own say-so or a scored record (`docs/REGISTRY.md`), which content-engine reads live. |
