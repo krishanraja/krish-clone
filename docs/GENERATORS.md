@@ -132,13 +132,14 @@ First run (17 Nov 2026, the nine top-level photos, in content-engine's cloud ses
 
 ### Round log
 
-Measure colour before regenerating anything: a generator's skin-tone bias is fixed free, locally, and only geometry or features need a new generation.
+Gate every still on `clone likeness` against all his real photos before showing it to him: on 18 Nov its pass line matched his own verdict on six stills out of six, so a still below it is not worth his look. Measure colour before regenerating anything: a generator's skin-tone bias is fixed free, locally, and only geometry or features need a new generation.
 
 
 | Round | Date | Stills | What Krish said | Change made | Identity after |
 |---|---|---|---|---|---|
 | 1 | 2026-11-17 | the six above | "they all look 90% there but need surgical 10%" | none yet: step 1 asks him to name each still's 10% | 0.734 to 0.787 |
 | 2 | 2026-11-18 | the bank of six (round 1 edits of five, the original glasses still) | none yet; measured against his face profile from all 59 photos | geometry was inside his normal range on every still; the one fault every still shared was skin too red (skin a* 24 to 31 against his 16.5 to 21; forehead worst). A local LAB pull of a* on skin-hued pixels only, no generation and no spend, brought skin into range on five of six and halved the forehead excess | 0.775 to 0.858 against his own centroid (unchanged by the fix) |
+| 3 | 2026-11-18 | the six colour-corrected stills | "1. Image 1 looks good and could pass for me. 2. Image 2: my chin is too small. 3. Image 3 is good and could pass for me. 4. Image 4 is good and could pass for me. 5. Image 5 looks nothing like me. 6. Image 6 is good and could pass for me." | stills 1, 3, 4 and 6 recorded as approved (`krish-still-higgsfield-1`, `-3`, `-4`, `-6`, each pinned by its file's sha256); still 5 dropped; still 2 given one edit, chin longer and stronger, two variants (about 0.5 credits). The chin measures longer on both (chin height 0.66 to 0.70) | `clone likeness` against all 59 real photos (pass line 0.711, the 5th percentile of him against himself) agreed with his verdict on all six: 0.757, 0.773, 0.755, 0.762 pass; still 2 0.678 and still 5 0.637 fail. Chin edits 0.678 and 0.690, still below the line |
 
 ## The bar
 

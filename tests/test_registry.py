@@ -33,10 +33,24 @@ APPROVED = {
                            "49b63e7540867514c4940b9ef516de0a2540ca4bd84528e84b88be0b554e4fd1"),
     "krish-voice-elevenlabs-v2": ("voice", "elevenlabs", "Krish v2", "EWMCMyM8o9ZcYCijk7nx",
                                   "e467fc8e2b0bd62da76615fb8fe1df0b0e1bd19aceb15d0ca42e685790dbfb09"),
+    "krish-still-higgsfield-1": ("likeness", "higgsfield", "Headshot 1, colour-corrected (round 2 bank)",
+        "b1684a272ba1c0151202f5a3799aba9241a09fcfd02ac9843458b4796fdb63c9",
+        "dc07a86e38427724f76c3693d10e2a49f6667c17c83fe209dbeb667490718521"),
+    "krish-still-higgsfield-3": ("likeness", "higgsfield", "Headshot 3, colour-corrected (round 2 bank)",
+        "04ba73f8fb1432188657c9362051231d01d4a1e74828e6d462ecc28dc7aad8ce",
+        "d3442f5fbf4ce970aae2ca74c112496b126a71502c865a20f206d5adc2f6bc24"),
+    "krish-still-higgsfield-4": ("likeness", "higgsfield", "Headshot 4, colour-corrected (round 2 bank)",
+        "f92390dc5ae042d46a61f83bf210f79d5aee1bc28b3331fb0a7269a962346bff",
+        "2bd25765c2146b38b99fe02cfe65c4699061f4de31f0f18b5c3877dd7dd733b6"),
+    "krish-still-higgsfield-6": ("likeness", "higgsfield", "Headshot 6, colour-corrected (round 2 bank)",
+        "c977de98edcf92de9a959061479c274c869f7732bb9344a48366349119295e08",
+        "6623481521b6327d89539ae8f493e52a44bfea33d0631b339e543116ce647c51"),
 }
-# His approvals by date: the three of 15 November came in one answer; Krish v2 on 17 November.
+# His approvals by date: the three of 15 November came in one answer; Krish v2 on 17 November; four generated
+# headshots in one answer on 18 November (each pinned by its file's sha256).
 APPROVED_ON = {"krish-voice-elevenlabs": "2026-11-15", "krish-avatar-heygen": "2026-11-15",
-               "krish-voice-heygen": "2026-11-15", "krish-voice-elevenlabs-v2": "2026-11-17"}
+               "krish-voice-heygen": "2026-11-15", "krish-voice-elevenlabs-v2": "2026-11-17",
+               **{f"krish-still-higgsfield-{n}": "2026-11-18" for n in (1, 3, 4, 6)}}
 
 
 def text(*entries) -> str:

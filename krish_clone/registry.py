@@ -31,11 +31,13 @@ FORMAT = "krish-clone.synthetic-approvals/1"
 DEFAULT = Path(__file__).resolve().parent.parent / "config" / "synthetic-approvals.json"
 RAW_URL = "https://raw.githubusercontent.com/krishanraja/krish-clone/main/config/synthetic-approvals.json"
 KINDS = ("voice", "likeness")
-PLATFORMS = {"voice": ("elevenlabs", "heygen"), "likeness": ("heygen",)}
+PLATFORMS = {"voice": ("elevenlabs", "heygen"), "likeness": ("heygen", "higgsfield")}
 BASES = ("own_say_so", "scored_record")
 # A platform_ref has the shape of that platform's ids, which no key has: an ElevenLabs voice id is 20 letters and
-# digits, a HeyGen avatar group or voice id 32 lowercase hex characters.
-PLATFORM_REF = {"elevenlabs": re.compile(r"^[A-Za-z0-9]{20}$"), "heygen": re.compile(r"^[0-9a-f]{32}$")}
+# digits, a HeyGen avatar group or voice id 32 lowercase hex characters. A Higgsfield still has no reusable id, so its
+# platform_ref is the sha256 of the exact still file he approved, 64 lowercase hex characters.
+PLATFORM_REF = {"elevenlabs": re.compile(r"^[A-Za-z0-9]{20}$"), "heygen": re.compile(r"^[0-9a-f]{32}$"),
+                "higgsfield": re.compile(r"^[0-9a-f]{64}$")}
 NAME = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)+$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 ID_SHAPED = 16  # a name segment this long reads as a platform id, never a name

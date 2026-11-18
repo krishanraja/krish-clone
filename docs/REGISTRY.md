@@ -12,6 +12,10 @@ Krish approves a synthetic voice or likeness of himself on his own say-so; no li
 | `krish-avatar-heygen` | likeness | heygen | Krish Raja (the avatar group, 15 looks) | `fa0069900c1049acbadc045c7866cdc5` | 2026-11-15, own say-so |
 | `krish-voice-heygen` | voice | heygen | Krish Voice (the avatar's default voice) | `76d9dedcfa2d4f628beb43090e74e473` | 2026-11-15, own say-so |
 | `krish-voice-elevenlabs-v2` | voice | elevenlabs | Krish v2 | `EWMCMyM8o9ZcYCijk7nx` | 2026-11-17, own say-so; his best narration voice so far |
+| `krish-still-higgsfield-1` | likeness | higgsfield | Headshot 1, colour-corrected (round 2 bank) | `b1684a272ba1c0151202f5a3799aba9241a09fcfd02ac9843458b4796fdb63c9` | 2026-11-18, own say-so |
+| `krish-still-higgsfield-3` | likeness | higgsfield | Headshot 3, colour-corrected (round 2 bank) | `04ba73f8fb1432188657c9362051231d01d4a1e74828e6d462ecc28dc7aad8ce` | 2026-11-18, own say-so |
+| `krish-still-higgsfield-4` | likeness | higgsfield | Headshot 4, colour-corrected (round 2 bank) | `f92390dc5ae042d46a61f83bf210f79d5aee1bc28b3331fb0a7269a962346bff` | 2026-11-18, own say-so |
+| `krish-still-higgsfield-6` | likeness | higgsfield | Headshot 6, colour-corrected (round 2 bank) | `c977de98edcf92de9a959061479c274c869f7732bb9344a48366349119295e08` | 2026-11-18, own say-so |
 
 **His best narration voice so far is `krish-voice-elevenlabs-v2`, "Krish v2"** (Krish, 2026-11-17: "this is the best choice thus far in terms of voice ID and your usage of it"). It is an ElevenLabs Voice Remix of Krish Remix for softer, glottal T's, used on `eleven_v3` with audio tags and sped up 15% after rendering (`docs/GENERATORS.md`). Krish Remix stays approved and is not withdrawn; his workspace now names it "Backup - Krish Remix", and the entry keeps the name he approved.
 
@@ -58,7 +62,7 @@ This repository is public. A platform's voice or avatar id does nothing without 
 |---|---|
 | `name` | Required. The registry's own name for the clone: lowercase words joined by hyphens (`krish-voice-elevenlabs`), unique. A new clone takes a new name. No segment of 16 characters or more, which would read as a platform id. |
 | `kind` | Required. `voice` or `likeness`. |
-| `platform` | Required. A voice comes from `elevenlabs` or `heygen`, a likeness from `heygen`. |
+| `platform` | Required. A voice comes from `elevenlabs` or `heygen`, a likeness from `heygen` or `higgsfield`. A `higgsfield` likeness is one generated still: its `platform_ref` is the sha256 of that exact file, so a changed or re-encoded still is not approved. |
 | `basis` | Required. `own_say_so` (his say-so on the clone itself) or `scored_record` (his approval of a scored listening-panel record). |
 | `approved_sha256` | Required, unique, 64 lowercase hex. The sha256 of exactly what he approved: for `own_say_so`, the canonical description below; for `scored_record`, the bytes of the record `clone abscore --record` wrote, which binds the pack's clips, the key, the panel, the answers and the score. |
 | `approved_words` | Required. Krish's exact words approving it, never a paraphrase. |
