@@ -16,6 +16,11 @@ Krish approves a synthetic voice or likeness of himself on his own say-so; no li
 | `krish-still-higgsfield-3` | likeness | higgsfield | Headshot 3, colour-corrected (round 2 bank) | `04ba73f8fb1432188657c9362051231d01d4a1e74828e6d462ecc28dc7aad8ce` | 2026-11-18, own say-so |
 | `krish-still-higgsfield-4` | likeness | higgsfield | Headshot 4, colour-corrected (round 2 bank) | `f92390dc5ae042d46a61f83bf210f79d5aee1bc28b3331fb0a7269a962346bff` | 2026-11-18, own say-so |
 | `krish-still-higgsfield-6` | likeness | higgsfield | Headshot 6, colour-corrected (round 2 bank) | `c977de98edcf92de9a959061479c274c869f7732bb9344a48366349119295e08` | 2026-11-18, own say-so |
+| `krish-still-higgsfield-5` | likeness | higgsfield | Headshot 5, loft window, three-quarter (round 4, variant A) | `2a312e8f7469017d1585928d715a198d287a2f9d8f1216cb341dcc83f99eb377` | 2026-11-18, own say-so |
+| `krish-still-higgsfield-1-shoulders` | likeness | higgsfield | Headshot 1 with broader shoulders, in between (round 5) | `272152829a05fac72b01579a190608f94642116fdb0fdb5d788c3dd65d8fbcaf` | 2026-11-18, own say-so |
+
+For covers, `krish-still-higgsfield-1-shoulders` is the version of headshot 1 to use (Krish, 2026-11-18: "Image 1 could also benefit from broader shoulders"); the original `-1` stays approved and is not withdrawn.
+
 
 **His best narration voice so far is `krish-voice-elevenlabs-v2`, "Krish v2"** (Krish, 2026-11-17: "this is the best choice thus far in terms of voice ID and your usage of it"). It is an ElevenLabs Voice Remix of Krish Remix for softer, glottal T's, used on `eleven_v3` with audio tags and sped up 15% after rendering (`docs/GENERATORS.md`). Krish Remix stays approved and is not withdrawn; his workspace now names it "Backup - Krish Remix", and the entry keeps the name he approved.
 

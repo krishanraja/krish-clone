@@ -89,6 +89,28 @@
       "approved_sha256": "6623481521b6327d89539ae8f493e52a44bfea33d0631b339e543116ce647c51",
       "approved_words": "I'll go from left to right and top to bottom.\n1. Image 1 looks good and could pass for me.\n2. Image 2: my chin is too small.\n3. Image 3 is good and could pass for me.\n4. Image 4 is good and could pass for me.\n5. Image 5 looks nothing like me.\n6. Image 6 is good and could pass for me.",
       "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-5",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 5, loft window, three-quarter (round 4, variant A)",
+      "platform_ref": "2a312e8f7469017d1585928d715a198d287a2f9d8f1216cb341dcc83f99eb377",
+      "approved_sha256": "1f68a3794a057c5504f3b5668d96628b7a65db26b813b6e48172663a6f70fc8e",
+      "approved_words": "These two",
+      "approved_on": "2026-11-18"
+    },
+    {
+      "name": "krish-still-higgsfield-1-shoulders",
+      "kind": "likeness",
+      "platform": "higgsfield",
+      "basis": "own_say_so",
+      "platform_name": "Headshot 1 with broader shoulders, in between (round 5)",
+      "platform_ref": "272152829a05fac72b01579a190608f94642116fdb0fdb5d788c3dd65d8fbcaf",
+      "approved_sha256": "d59682d74539206a8a21fc4adea1ea439babeca3bb35d29993181b9d2f3d0861",
+      "approved_words": "These two",
+      "approved_on": "2026-11-18"
     }
   ]
 }
